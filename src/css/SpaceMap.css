@@ -1,0 +1,27 @@
+:root {
+  --ASTEROID: hsl(0, 9%, 17%);
+  --MOON: hsl(0, 0%, 41%);
+  --PLANET: hsl(116, 53%, 30%);
+  --GAS-GIANT: hsl(180, 100%, 50%);
+  --STAR: hsl(61, 100%, 50%);
+  --WORMHOLE: rgb(255, 255, 255);
+}
+
+.SpaceMap_Canvas {
+  display: block;
+  overflow-x: visible;
+  overflow-y: visible;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.SpaceMap_SelectedLocation {
+  opacity: 0;
+  background-color: white;
+  z-index: 20;
+  position: absolute;
+}
