@@ -14,7 +14,8 @@ import { useCookies } from "react-cookie"
 import { SpaceTraders } from "spacetraders-sdk"
 
 const spaceTraders = new SpaceTraders()
-spaceTraders.init('duongc', '')
+const token = require('./token.json')
+spaceTraders.init('duongc', `${token}`)
 
 const Main = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['user', 'systems'])
