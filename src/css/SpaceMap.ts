@@ -1,5 +1,5 @@
 export const colors: object = {
-  'ASTEROID': "hsl(0, 9%, 17%);",
+  'ASTEROID': "hsl(0, 0%, 75%)",
   'MOON': "hsl(0, 0%, 41%)",
   'PLANET': "hsl(116, 53%, 30%)",
   'GAS_GIANT': "hsl(180, 100%, 50%)",
@@ -7,7 +7,7 @@ export const colors: object = {
 }
 
 export const scale: object = {
-  'ASTEROID': .75,
+  'ASTEROID': 1,
   'MOON': 1,
   'PLANET': 2,
   'GAS_GIANT': 5,

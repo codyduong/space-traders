@@ -3,9 +3,14 @@ import "./css/SpaceMap.css"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from 'three'
 import { colors, scale } from "./css/SpaceMap"
+import useWindowDimensions from "./hooks/useWindowDimensions"
 
-function Plane() {
-  const plane = useRef()
+function Plane(props: any) {
+  const plane = useRef<THREE.Mesh>(null!)
+
+  useEffect(() => {
+    plane.current.position.setZ(props.zOffset)
+  })
 
   return (
     <mesh ref={plane}>
@@ -61,6 +66,7 @@ const MapLocationData = (props: any) => {
 }
 
 const SpaceMap = (props: any) => {
+  const { height, width } = useWindowDimensions()
 
   const LocationDataTab = props.system?.locations.map((loc: any) => {
     return (
@@ -88,7 +94,7 @@ const SpaceMap = (props: any) => {
             _!.style.zIndex = -10
             _!.style.opacity = 1
           }
-          _!.style.transform = `translate(${x}px, ${y}px)`
+          _!.style.transform = `translate(${Number(x)/width * 100}vw, ${Number(y)/height * 100}vh)`
           _!.style.zIndex = active ? -10 : 20
           _!.style.opacity = active ? '0' : '1'
         }}
@@ -101,7 +107,7 @@ const SpaceMap = (props: any) => {
       <div className="SpaceMap_Canvas">
         <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
           <ambientLight />
-          <Plane />
+          <Plane zOffset={-10}/>
           {Locations}
         </Canvas>
       </div>
