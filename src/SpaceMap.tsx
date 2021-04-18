@@ -4,21 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from 'three'
 import { colors, scale } from "./css/SpaceMap"
 import useWindowDimensions from "./hooks/useWindowDimensions"
-
-function Plane(props: any) {
-  const plane = useRef<THREE.Mesh>(null!)
-
-  useEffect(() => {
-    plane.current.position.setZ(props.zOffset)
-  })
-
-  return (
-    <mesh ref={plane}>
-      <planeBufferGeometry attach="geometry" args={[1000,1000]} />
-      <meshStandardMaterial attach="material" color={"black"} />
-    </mesh>
-  )
-}
+import { Plane, Line } from "@react-three/drei"
 
 const MapLocation = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
@@ -54,13 +40,16 @@ const MapLocation = (props: any) => {
 }
 
 const MapLocationData = (props: any) => {
+  const [shown, setShown] = useState(false)
+
   return (
     <div 
       className="SpaceMap_SelectedLocation" 
       key={props.loc.name} 
       id={props.loc.name}
     >
-      {String(`${props.loc.name} (${props.loc.x}, ${props.loc.y})`)}
+      {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
+      {String(`(${props.loc.x}, ${props.loc.y})`)}
     </div>
   )
 }
@@ -80,7 +69,7 @@ const SpaceMap = (props: any) => {
     return (
       <MapLocation 
         key={loc.name} 
-        position={[x,y,0]} 
+        position={[x , y, 0]} 
         name={loc.name} 
         type={loc.type}
         clickExtension={(x: string, y: string, useState: any) => {
@@ -95,7 +84,7 @@ const SpaceMap = (props: any) => {
             _!.style.opacity = 1
           }
           _!.style.transform = `translate(${Number(x)/width * 100}vw, ${Number(y)/height * 100}vh)`
-          _!.style.zIndex = active ? -10 : 20
+          _!.style.zIndex = active ? -10 : 10
           _!.style.opacity = active ? '0' : '1'
         }}
       />
@@ -107,7 +96,17 @@ const SpaceMap = (props: any) => {
       <div className="SpaceMap_Canvas">
         <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
           <ambientLight />
-          <Plane zOffset={-10}/>
+          <Plane position={[0, 0, -10]} args={[2000, 2000, 4, 4]}>
+            <meshBasicMaterial color="black" />
+          </Plane>
+          <Line 
+            points={[[-1000, 0, -9.9], [1000, 0, -9.9]]}
+            color="hsl(0, 100%, 25%)"
+          />
+          <Line 
+            points={[[0, -1000, -9.9], [0, 1000, -9.9]]}
+            color="hsl(100, 100%, 10%)"
+          />
           {Locations}
         </Canvas>
       </div>
