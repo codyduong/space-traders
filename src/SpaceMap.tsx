@@ -57,13 +57,13 @@ const MapLocationData = (props: any) => {
 const SpaceMap = (props: any) => {
   const { height, width } = useWindowDimensions()
 
-  const LocationDataTab = props.system?.locations.map((loc: any) => {
+  const CelestialData = props.system?.locations.map((loc: any) => {
     return (
       <MapLocationData loc={loc}/>
     )
   })
 
-  const Locations = props.system?.locations.map((loc: any) => {
+  const Celestials = props.system?.locations.map((loc: any) => {
     const x = loc.x
     const y = loc.y
     return (
@@ -112,10 +112,10 @@ const SpaceMap = (props: any) => {
             points={[[0, -1000, -9.9], [0, 1000, -9.9]]}
             color="hsl(100, 100%, 10%)"
           /> */}
-          {Locations}
+          {Celestials}
         </Canvas>
       </div>
-      {LocationDataTab}
+      {CelestialData}
     </div>
   )
 }
