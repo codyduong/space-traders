@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from 'three'
 import { colors, scale } from "./css/SpaceMap"
 import useWindowDimensions from "./hooks/useWindowDimensions"
-import { Plane, Line } from "@react-three/drei"
+import { Plane, Line, Stars } from "@react-three/drei"
 
 const MapLocation = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
@@ -33,7 +33,7 @@ const MapLocation = (props: any) => {
       }}
       onPointerOut={(event) => setHover(false)}
     >
-      <sphereGeometry args={[1, 32, 32]} />
+      {props.type==="WORMHOLE"} ? <></> : <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial attach="material" roughness={0.5} color={_c}  />
     </mesh>
   )
@@ -96,9 +96,14 @@ const SpaceMap = (props: any) => {
       <div className="SpaceMap_Canvas">
         <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
           <ambientLight />
-          <Plane position={[0, 0, -10]} args={[2000, 2000, 4, 4]}>
+          <Plane position={[0, 0, -300]} args={[3000, 3000, 4, 4]}>
             <meshBasicMaterial color="black" />
           </Plane>
+          <Stars 
+            radius={100}
+            factor={.5}
+            count={2500}
+          />
           <Line 
             points={[[-1000, 0, -9.9], [1000, 0, -9.9]]}
             color="hsl(0, 100%, 25%)"
