@@ -39,7 +39,7 @@ const SelectSystem = (props: any) => {
     <input
       className="SelectSystem_Button"
       type="Button"
-      value={shown ? `Select System ▲: ${systemSelected.name}` : `Select System ▼: ${systemSelected.name}`}
+      value={shown ? `Select System ▲: ${systemSelected?.name}` : `Select System ▼: ${systemSelected?.name}`}
       onClick={() => {
         setShown(!shown)
       }}

@@ -15,7 +15,7 @@ import { SpaceTraders } from "spacetraders-sdk"
 
 const spaceTraders = new SpaceTraders()
 const token = require('./token.json')
-spaceTraders.init('duongc', `${token}`)
+spaceTraders.init('duongc', `${token.token}`)
 
 const Main = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['user', 'systems'])
@@ -80,7 +80,7 @@ const Main = () => {
           setCookie('systems', _, { path: '/ ' })
         })
     }
-  }, [systems, cookies, setCookie])
+  }, [])
 
   return (
     <userContext.Provider value={{user: user, updateUser: updateUser}}>
