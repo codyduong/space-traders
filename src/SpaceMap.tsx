@@ -101,17 +101,17 @@ const SpaceMap = (props: any) => {
           </Plane>
           <Stars 
             radius={100}
-            factor={.5}
-            count={2500}
+            factor={1}
+            count={300}
           />
-          <Line 
+          {/* <Line 
             points={[[-1000, 0, -9.9], [1000, 0, -9.9]]}
             color="hsl(0, 100%, 25%)"
           />
           <Line 
             points={[[0, -1000, -9.9], [0, 1000, -9.9]]}
             color="hsl(100, 100%, 10%)"
-          />
+          /> */}
           {Locations}
         </Canvas>
       </div>
