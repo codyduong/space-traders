@@ -1,11 +1,11 @@
 import { createContext } from "react"; 
-import userInterface from "../interfaces/user"
+import { User } from "spacetraders-sdk/dist/types";
 
-export const userDefault: userInterface = {
+export const userDefault: User = {
   username: "",
   credits: 0,
-  loans: null,
-  ships: null,
+  loans: [],
+  ships: [],
 }
 
 export const userContext = createContext({

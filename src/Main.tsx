@@ -3,8 +3,7 @@ import "./css/Main.css"
 // import { settingsDefault, settingsContext } from "./context/settingsContext"
 // import settingsInterface from "./interfaces/settings"
 import { userDefault, userContext } from "./context/userContext"
-import userInterface from "./interfaces/user"
-import { systemsDefault, systemsContext } from "./context/systemsContext"
+import { systemsDefault, systemsContext, SystemsResponse } from "./context/systemsContext"
 // import systemsInterface from "./interfaces/systems"
 import SpaceMap from "./SpaceMap"
 import NavBar from "./NavBar"
@@ -12,6 +11,7 @@ import Money from "./Money"
 import { useCookies } from "react-cookie"
 
 import { SpaceTraders } from "spacetraders-sdk"
+import { User } from "spacetraders-sdk/dist/types"
 
 const spaceTraders = new SpaceTraders()
 const token = require('./token.json')
@@ -23,27 +23,21 @@ const Main = () => {
   // const toggleTheme = () => {
 
   // }
-  const [user, setUser] = useState<userInterface>(cookies.user ?? userDefault)
-  const updateUser = (user: userInterface) => {
+  const [user, setUser] = useState<User>(cookies.user ?? userDefault)
+  const updateUser = (user: User) => {
     spaceTraders.getAccount()
       .then(res => {
-        console.log(res)
-        let _: userInterface = {
-          username: res.user.username,
-          credits: res.user.credits,
-          loans: res.user.loans,
-          ships: res.user.ships,
-        }
-        setUser(_)
-        setCookie('user', _, { path: '/ ' })
+        console.log(res.user)
+        setUser(res.user)
+        setCookie('user', res.user, { path: '/ ' })
       })
   }
 
-  const [systems, setSystems] = useState<any>(cookies.systems ?? systemsDefault)
+  const [systems, setSystems] = useState<SystemsResponse>(cookies.systems ?? systemsDefault)
   const updateSystems = (systems: any) => {
     spaceTraders.listSystems()
       .then(res => {
-        let _: any = res //A dumb workaround for bad typing on the sdk side
+        let _: any = res
         console.log(_.systems[0])
         setSystems(_)
         selectSystem(_.systems[0]) //The default system is the first selected one.
@@ -59,14 +53,8 @@ const Main = () => {
       spaceTraders.getAccount()
         .then(res => {
           console.log(res)
-          let _: userInterface = {
-            username: res.user.username,
-            credits: res.user.credits,
-            loans: res.user.loans,
-            ships: res.user.ships,
-          }
-          setUser(_)
-          setCookie('user', _, { path: '/ ' })
+          setUser(res.user)
+          setCookie('user', res.user, { path: '/ ' })
         })
     }
     if (!cookies.systems) {

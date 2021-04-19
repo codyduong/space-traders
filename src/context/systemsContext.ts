@@ -1,13 +1,18 @@
 import { createContext } from "react"; 
-import systemsInterface from "../interfaces/systems"
-import systemInterface from "../interfaces/system"
+import { System } from "spacetraders-sdk/dist/types";
 
-export const systemsDefault: systemsInterface = {
-  systems: [],
+//It seems SystemsResponse from spacetraders is wrong, so here is mine
+export interface SystemsResponse {
+  systems: System[]
 }
 
-export const systemSelectedDefault: systemInterface = {
+export const systemsDefault: SystemsResponse = {
+  systems: []
+}
+
+export const systemSelectedDefault: System = {
   name: "",
+  symbol: "",
   locations: [],
 }
 
