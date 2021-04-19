@@ -84,7 +84,7 @@ const Main = () => {
 
   return (
     <userContext.Provider value={{user: user, updateUser: updateUser}}>
-      <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems}}>
+      <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem}}>
         <div className="Main">
           <SpaceMap system={systemSelected}/>
           <div className="Main_Margin">

@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { animated, useSpring } from "react-spring"
+import { systemsContext } from "./context/systemsContext"
 import "./css/Locations.css"
 
 const Locations = (props: any) => {
+  const { systemSelected } = useContext(systemsContext)
   const [shown, setShown] = useState(false)
 
   const [init, setInit] = useState(false)
@@ -20,6 +22,14 @@ const Locations = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
+  const locations = systemSelected.locations.map((location: any) => {
+    return (
+      <div>
+        {location.name}
+      </div>
+    )
+  })
+
   return (
     <div className="Locations_Main">
       <input
@@ -30,9 +40,7 @@ const Locations = (props: any) => {
         value={shown ? "Locations ▲" : "Locations ▼"}
       ></input>
       <animated.div style={animate}>
-        <div>
-          your mom
-        </div>
+        {locations}
       </animated.div>
     </div>
   )

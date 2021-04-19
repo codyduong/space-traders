@@ -11,7 +11,7 @@ const MapLocation = (props: any) => {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
+  //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
 
   // @ts-ignore: i can not be assed to interface and type just for colors
   const _c: any = colors[props.type]
