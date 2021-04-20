@@ -15,7 +15,7 @@ const Ships = (props: any) => {
     reset: false,
     delay: 0,
     reverse: !shown,
-    overflow: 'auto',
+    overflow: 'hidden',
     maxWidth: init ? '30em' : '0em',
     maxHeight: init ? '30em' : '0em',
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
