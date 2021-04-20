@@ -83,7 +83,8 @@ const SpaceMap = (props: any) => {
             _!.style.zIndex = -10
             _!.style.opacity = 1
           }
-          _!.style.transform = `translate(${Number(x)/width * 100}vw, ${Number(y)/height * 100}vh)`
+          let [ w_ratio, h_ratio ] = [Number(x)/width, Number(y)/height]
+          _!.style.transform = `translate(${w_ratio * 100}vw, ${h_ratio * 100}vh)`
           _!.style.zIndex = active ? -10 : 10
           _!.style.opacity = active ? '0' : '1'
         }}
