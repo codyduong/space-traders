@@ -24,6 +24,7 @@ const SelectSystem = (props: any) => {
   const systemsList = systems.systems.map((system: any) => {
     return (
       <input
+        key={system.name}
         className="SelectSystem_Button"
         type="Button"
         value={system.name}

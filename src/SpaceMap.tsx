@@ -6,7 +6,7 @@ import { colors, scale } from "./css/SpaceMap"
 import useWindowDimensions from "./hooks/useWindowDimensions"
 import { Plane, Line, Stars } from "@react-three/drei"
 
-const MapLocation = (props: any) => {
+const Celestial = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
@@ -39,13 +39,13 @@ const MapLocation = (props: any) => {
   )
 }
 
-const MapLocationData = (props: any) => {
+const CelestialData = (props: any) => {
   const [shown, setShown] = useState(false)
 
   return (
     <div 
       className="SpaceMap_SelectedLocation" 
-      key={props.loc.name} 
+      key={`${props.loc.symbol}_DATA`} 
       id={props.loc.name}
     >
       {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
@@ -57,9 +57,9 @@ const MapLocationData = (props: any) => {
 const SpaceMap = (props: any) => {
   const { height, width } = useWindowDimensions()
 
-  const CelestialData = props.system?.locations.map((loc: any) => {
+  const CelestialDatas = props.system?.locations.map((loc: any) => {
     return (
-      <MapLocationData loc={loc}/>
+      <CelestialData loc={loc}/>
     )
   })
 
@@ -67,8 +67,8 @@ const SpaceMap = (props: any) => {
     const x = loc.x
     const y = loc.y
     return (
-      <MapLocation 
-        key={loc.name} 
+      <Celestial 
+        key={loc.symbol} 
         position={[x , y, 0]} 
         name={loc.name} 
         type={loc.type}
@@ -116,7 +116,7 @@ const SpaceMap = (props: any) => {
           {Celestials}
         </Canvas>
       </div>
-      {CelestialData}
+      {CelestialDatas}
     </div>
   )
 }

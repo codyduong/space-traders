@@ -24,7 +24,7 @@ const Locations = (props: any) => {
 
   const locations = systemSelected?.locations.map((location: any) => {
     return (
-      <div>
+      <div key={location.symbol}>
         {location.name}
       </div>
     )
