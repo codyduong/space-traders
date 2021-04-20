@@ -1,14 +1,42 @@
-import { useState, useContext } from "react"
+import { useState, useEffect } from "react"
 import { userContext } from "./context/userContext"
+import { animated, useSpring } from "react-spring"
 import "./css/Money.css"
 
 const Money = () => {
+  const [shown, setShown] = useState(false)
+
+  const [init, setInit] = useState(false)
+  useEffect(()=>{
+    setInit(true)
+  }, [])
+  const animate = useSpring({
+    zIndex: 10,
+    opacity: init ? 1 : 0,
+    reset: false,
+    delay: 0,
+    reverse: !shown,
+    overflow: 'hidden',
+    maxWidth: init ? '30em' : '0em',
+    maxHeight: init ? '30em' : '0em',
+    from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
+  })
 
   return (
     <userContext.Consumer>
       {({ user }) => (
         <div className="Money_Main">
-          Credits: {user.credits}
+          <div 
+            className="Money_Credits"
+            onClick={()=>{
+              setShown(!shown)
+            }}
+          >
+            Credits: {user.credits}
+          </div>
+          <animated.div style={animate}>
+            words
+          </animated.div>
         </div>
       )}
     </userContext.Consumer>
