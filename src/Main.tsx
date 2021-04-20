@@ -10,7 +10,7 @@ import NavBar from "./NavBar"
 import Money from "./Money"
 import { useCookies } from "react-cookie"
 import { User } from "spacetraders-sdk/dist/types"
-import { SpaceTradersExtend } from "./spacetraders/spacetraders"
+import SpaceTradersExtend from "./spacetraders/spacetraders"
 
 const token = require('./token.json')
 const spaceTraders = new SpaceTradersExtend()
