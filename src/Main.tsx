@@ -9,12 +9,11 @@ import SpaceMap from "./SpaceMap"
 import NavBar from "./NavBar"
 import Money from "./Money"
 import { useCookies } from "react-cookie"
-
-import { SpaceTraders } from "spacetraders-sdk"
 import { User } from "spacetraders-sdk/dist/types"
+import { SpaceTradersExtend } from "./spacetraders/spacetraders"
 
-const spaceTraders = new SpaceTraders()
 const token = require('./token.json')
+const spaceTraders = new SpaceTradersExtend()
 spaceTraders.init('duongc', `${token.token}`)
 
 const Main = () => {
@@ -35,14 +34,13 @@ const Main = () => {
 
   const [systems, setSystems] = useState<SystemsResponse>(cookies.systems ?? systemsDefault)
   const updateSystems = (systems: any) => {
-    spaceTraders.listSystems()
+    spaceTraders.listSystemsFixed()
       .then(res => {
-        let _: any = res
-        console.log(_.systems[0])
-        setSystems(_)
-        selectSystem(_.systems[0]) //The default system is the first selected one.
-        setCookie('selectedSystem', _.systems[0], { path: '/ ' })
-        setCookie('systems', _, { path: '/ ' })
+        console.log(res)
+        setSystems(res)
+        selectSystem(res.systems[0]) //The default system is the first selected one.
+        setCookie('selectedSystem', res.systems[0], { path: '/ ' })
+        setCookie('systems', res, { path: '/ ' })
       })
   } 
 
