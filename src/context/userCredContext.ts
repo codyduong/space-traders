@@ -2,11 +2,11 @@ import { createContext } from "react"
 import { UserCred } from "../types"
 
 export const userCredDefault: UserCred = {
-  username: '',
-  token: '',
+	username: '',
+	token: '',
 }
 
 export const userCredContext = createContext({
-  userCred: userCredDefault,
-  updateUserCred: (prop: UserCred) => {},
+	userCred: userCredDefault,
+	updateUserCred: (prop: UserCred) => { },
 })

@@ -1,15 +1,15 @@
 .Money_Main {
-  text-align: center;
-  width: fit-content;
-  height: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: white;
-  z-index: 10;
+	text-align: center;
+	width: fit-content;
+	height: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: white;
+	z-index: 10;
 }
 
 .Money_Credits {
-  z-index: inherit;
-  width: fit-content;
-  height: fit-content;
+	z-index: inherit;
+	width: fit-content;
+	height: fit-content;
 }

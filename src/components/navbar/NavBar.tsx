@@ -6,16 +6,16 @@ import Locations from "./Locations"
 
 const NavBar = (props: any) => {
 
-  return (
-    <div className="NavBar_Main">
-      <div className="NavBar_Buttons">
-        <UserCredentials />
-        <SelectSystem selectSystem={props.selectSystem}/>
-        <Ships />
-        <Locations />
-      </div>
-    </div>
-  )
+	return (
+		<div className="NavBar_Main">
+			<div className="NavBar_Buttons">
+				<UserCredentials />
+				<SelectSystem selectSystem={props.selectSystem} />
+				<Ships />
+				<Locations />
+			</div>
+		</div>
+	)
 }
 
 export default NavBar
