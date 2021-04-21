@@ -37,7 +37,7 @@ const UserCredentials = () => {
           id="user"
           type="text"
           onChange={(event: any)=>{setUser(event.target.value)}}
-        ></input>
+        ></input><br />
         <label htmlFor="toke">Token: </label>
         <input
           className="UserCredentials_Text"
@@ -46,7 +46,7 @@ const UserCredentials = () => {
           onChange={(event: any)=>{
             setToke(event.target.value)
           }}
-        ></input>
+        ></input><br />
         <label htmlFor="submit"></label>
         <input
           className="UserCredentials_Button"
