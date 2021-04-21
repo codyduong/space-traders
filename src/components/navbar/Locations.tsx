@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { animated, useSpring } from "react-spring"
-import { systemsContext } from "./context/systemsContext"
+import { systemsContext } from "../../context/systemsContext"
 import "./css/Locations.css"
 
 const Locations = (props: any) => {

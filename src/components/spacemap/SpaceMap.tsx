@@ -3,7 +3,7 @@ import "./css/SpaceMap.css"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import * as THREE from 'three'
 import { colors, scale } from "./css/SpaceMap"
-import useWindowDimensions from "./hooks/useWindowDimensions"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 import { Plane, Line, Stars } from "@react-three/drei"
 
 const Celestial = (props: any) => {

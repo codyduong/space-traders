@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react"
 import { useSpring, animated } from "react-spring"
-import { userCredContext } from "./context/userCredContext"
+import { userCredContext } from "../../context/userCredContext"
 
 const UserCredentials = () => {
   const {userCred, updateUserCred} = useContext(userCredContext)

@@ -6,9 +6,9 @@ import { userContext } from "./context/userContext"
 import { systemsContext } from "./context/systemsContext"
 import { userCredContext } from "./context/userCredContext"
 // import systemsInterface from "./interfaces/systems"
-import SpaceMap from "./SpaceMap"
-import NavBar from "./NavBar"
-import Money from "./Money"
+import SpaceMap from "./components/spacemap/SpaceMap"
+import NavBar from "./components/navbar/NavBar"
+import Money from "./components/money/Money"
 import { useCookies } from "react-cookie"
 import { useLocalStorage, useSessionStorage } from "./hooks/storageHooks"
 import { System, User } from "spacetraders-sdk/dist/types"
@@ -16,9 +16,7 @@ import { UserCred } from "./types"
 import SpaceTradersExtend, { SystemsResponse } from "./spacetraders/spacetraders"
 import { AuthenticationError } from "spacetraders-sdk/dist/errors"
 
-const token = require('./token.json')
 const spaceTraders = new SpaceTradersExtend()
-//spaceTraders.init('duongc', `${token.token}`)
 
 const Main = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['session'])

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect} from "react"
-import { systemsContext } from "./context/systemsContext"
+import { systemsContext } from "../../context/systemsContext"
 import { animated, useSpring } from "react-spring"
 
 const SelectSystem = (props: any) => {
