@@ -19,82 +19,82 @@ import { AuthenticationError } from "spacetraders-sdk/dist/errors"
 const spaceTraders = new SpaceTradersExtend()
 
 const Main = () => {
-	const [cookies, setCookie, removeCookie] = useCookies(['session'])
-	const session = cookies.session ?? null
+  const [cookies, setCookie, removeCookie] = useCookies(['session'])
+  const session = cookies.session ?? null
 
-	const [userCred, setUserCred] = useLocalStorage<UserCred>('user')
-	const [userError, setUserError] = useState<boolean>(false)
-	try {
-		userCred.username && spaceTraders.init(userCred.username, userCred.token)
-	} catch (e) {
-		//alert(e)
-		if (e instanceof AuthenticationError) {
+  const [userCred, setUserCred] = useLocalStorage<UserCred>('user')
+  const [userError, setUserError] = useState<boolean>(false)
+  try {
+    userCred.username && spaceTraders.init(userCred.username, userCred.token)
+  } catch (e) {
+    //alert(e)
+    if (e instanceof AuthenticationError) {
 
-		}
-	}
+    }
+  }
 
-	const [user, setUser] = useSessionStorage<User>('user')
-	const updateUser = (user: User) => {
-		userCred && spaceTraders.getAccount()
-			.then(res => {
-				console.log(res.user)
-				setUser(res.user)
-			})
-	}
+  const [user, setUser] = useSessionStorage<User>('user')
+  const updateUser = (user: User) => {
+    userCred && spaceTraders.getAccount()
+      .then(res => {
+        console.log(res.user)
+        setUser(res.user)
+      })
+  }
 
-	const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
-	const updateSystems = (systems: any) => {
-		userCred && spaceTraders.listSystemsFixed()
-			.then(res => {
-				console.log(res)
-				setSystems(res)
-				selectSystem(res.systems[0]) //The default system is the first selected one.
-			})
-	}
+  const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
+  const updateSystems = (systems: any) => {
+    userCred && spaceTraders.listSystemsFixed()
+      .then(res => {
+        console.log(res)
+        setSystems(res)
+        selectSystem(res.systems[0]) //The default system is the first selected one.
+      })
+  } 
 
-	const [systemSelected, selectSystem] = useSessionStorage<System>('systemSelected')
+  const [systemSelected, selectSystem] = useSessionStorage<System>('systemSelected')
 
-	useEffect(() => {
-		if (userCred) {
-			if (user === null || session === null) {
-				spaceTraders.getAccount()
-					.then(res => {
-						console.log(res)
-						setUser(res.user)
-					})
-			}
-			if (systems === null || session === null) {
-				spaceTraders.listSystems()
-					.then(res => {
-						let _: any = res //A dumb workaround for bad typing on the sdk side
-						console.log(_.systems[0])
-						setSystems(_)
-						selectSystem(_.systems[0]) //The default system is the first selected one.
-					})
-			}
-		}
-		if (session === null) {
-			setCookie('session', '', { path: '/ ', maxAge: 900 })
-		}
-	}, [userCred, systems, user, session])
+  useEffect(() => {
+    if (userCred) {
+      if (user===null || session===null) {
+        spaceTraders.getAccount()
+          .then(res => {
+            console.log(res)
+            setUser(res.user)
+          })
+      }
+      if (systems===null || session===null) {
+        spaceTraders.listSystems()
+          .then(res => {
+            let _: any = res //A dumb workaround for bad typing on the sdk side
+            console.log(_.systems[0])
+            setSystems(_)
+            selectSystem(_.systems[0]) //The default system is the first selected one.
+          })
+      }
+    }
+    if (session===null) {
+      setCookie('session', '', { path: '/ ', maxAge: 900})
+    }
+  }, [userCred, systems, user, session])
 
-	return (
-		<userCredContext.Provider value={{ userCred: userCred, updateUserCred: setUserCred }}>
-			<userContext.Provider value={{ user: user, updateUser: updateUser }}>
-				<systemsContext.Provider value={{ systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem }}>
-					<div className="Main">
-						<SpaceMap system={systemSelected} />
-						<div className="Main_Margin">
-							<div className="Main_ResponsiveGrid">
-								<NavBar />
-								<Money />
-							</div>
-						</div>
-					</div>
-				</systemsContext.Provider>
-			</userContext.Provider>
-		</userCredContext.Provider>
-	)
+  return (
+    <userCredContext.Provider value={{userCred: userCred, updateUserCred: setUserCred}}>
+    <userContext.Provider value={{user: user, updateUser: updateUser}}>
+    <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem}}>
+    <div className="Main">
+      <SpaceMap system={systemSelected} />
+      <div className="Main_Margin">
+        <div className="Main_ResponsiveGrid">
+          <NavBar />
+          <Money />
+        </div>
+      </div>
+    </div>
+    </systemsContext.Provider>
+    </userContext.Provider>
+    </userCredContext.Provider>
+  )
 }
 
 export default Main

@@ -5,42 +5,42 @@ import "./css/Money.css"
 
 const Money = () => {
 
-	const [shown, setShown] = useState<boolean>(false)
-	const [init, setInit] = useState<boolean>(false)
-	useEffect(() => {
-		setInit(true)
-	}, [])
-	const animate = useSpring({
-		zIndex: 10,
-		opacity: init ? 1 : 0,
-		reset: false,
-		delay: 0,
-		reverse: !shown,
-		overflow: 'hidden',
-		maxWidth: init ? '30em' : '0em',
-		maxHeight: init ? '30em' : '0em',
-		from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em' },
-	})
+  const [shown, setShown] = useState<boolean>(false)
+  const [init, setInit] = useState<boolean>(false)
+  useEffect(()=>{
+    setInit(true)
+  }, [])
+  const animate = useSpring({
+    zIndex: 10,
+    opacity: init ? 1 : 0,
+    reset: false,
+    delay: 0,
+    reverse: !shown,
+    overflow: 'hidden',
+    maxWidth: init ? '30em' : '0em',
+    maxHeight: init ? '30em' : '0em',
+    from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
+  })
 
-	return (
-		<userContext.Consumer>
-			{({ user }) => (
-				<div className="Money_Main">
-					<div
-						className="Money_Credits"
-						onClick={() => {
-							setShown(!shown)
-						}}
-					>
-						Credits: {user?.credits}
-					</div>
-					<animated.div style={animate}>
-						words
+  return (
+    <userContext.Consumer>
+      {({ user }) => (
+        <div className="Money_Main">
+          <div 
+            className="Money_Credits"
+            onClick={()=>{
+              setShown(!shown)
+            }}
+          >
+            Credits: {user?.credits}
+          </div>
+          <animated.div style={animate}>
+            words
           </animated.div>
-				</div>
-			)}
-		</userContext.Consumer>
-	)
+        </div>
+      )}
+    </userContext.Consumer>
+  )
 }
 
 export default Money
