@@ -27,7 +27,7 @@ const UserCredentials = () => {
     <div>
       <input 
         type="button"
-        defaultValue={shown ? `${user} ▲` : `${user} ▼`}
+        defaultValue={shown ? `${userCred.username} ▲` : `${userCred.username} ▼`}
         onClick={()=>{setShown(!shown)}}
       ></input>
       <animated.div style={animate}>
@@ -37,15 +37,15 @@ const UserCredentials = () => {
           id="user"
           type="text"
           onChange={(event: any)=>{setUser(event.target.value)}}
+          placeholder={user}
         ></input><br />
         <label htmlFor="toke">Token: </label>
         <input
           className="UserCredentials_Text"
           id="toke"
           type="text"
-          onChange={(event: any)=>{
-            setToke(event.target.value)
-          }}
+          onChange={(event: any)=>{setToke(event.target.value)}}
+          placeholder={toke}
         ></input><br />
         <label htmlFor="submit"></label>
         <input

@@ -37,7 +37,7 @@ const Main = () => {
 
   const [user, setUser] = useSessionStorage<User>('user')
   const updateUser = (user: User) => {
-    userCred.username && spaceTraders.getAccount()
+    userCred && spaceTraders.getAccount()
       .then(res => {
         console.log(res.user)
         setUser(res.user)
@@ -46,7 +46,7 @@ const Main = () => {
 
   const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
   const updateSystems = (systems: any) => {
-    userCred.username && spaceTraders.listSystemsFixed()
+    userCred && spaceTraders.listSystemsFixed()
       .then(res => {
         console.log(res)
         setSystems(res)
@@ -57,7 +57,7 @@ const Main = () => {
   const [systemSelected, selectSystem] = useSessionStorage<System>('systemSelected')
 
   useEffect(() => {
-    if (userCred!==null) {
+    if (userCred) {
       if (user===null || session===null) {
         spaceTraders.getAccount()
           .then(res => {
@@ -78,7 +78,7 @@ const Main = () => {
     if (session===null) {
       setCookie('session', '', { path: '/ ', maxAge: 900})
     }
-  }, [])
+  }, [userCred, systems, user, session])
 
   return (
     <userCredContext.Provider value={{userCred: userCred, updateUserCred: setUserCred}}>
