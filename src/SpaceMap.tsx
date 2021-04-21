@@ -45,7 +45,6 @@ const CelestialData = (props: any) => {
   return (
     <div 
       className="SpaceMap_SelectedLocation" 
-      key={`${props.loc.symbol}_DATA`} 
       id={props.loc.name}
     >
       {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
@@ -60,7 +59,7 @@ const SpaceMap = (props: any) => {
   const [CelestialDatas, Celestials] = 
   [props.system?.locations?.map((loc: any) => {
     return (
-      <CelestialData loc={loc}/>
+      <CelestialData key={`${loc.symbol}_DATA`} loc={loc}/>
     )
   }), props.system?.locations?.map((loc: any) => {
     const x = loc.x

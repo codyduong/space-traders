@@ -27,7 +27,7 @@ const SelectSystem = (props: any) => {
         key={system.name}
         className="SelectSystem_Button"
         type="Button"
-        value={system.name}
+        defaultValue={system.name}
         onClick={() => {
           selectSystem(system)
         }}
@@ -40,7 +40,7 @@ const SelectSystem = (props: any) => {
     <input
       className="SelectSystem_Button"
       type="Button"
-      value={shown ? `Select System ▲: ${systemSelected?.name}` : `Select System ▼: ${systemSelected?.name}`}
+      defaultValue={shown ? `Select System ▲: ${systemSelected?.name}` : `Select System ▼: ${systemSelected?.name}`}
       onClick={() => {
         setShown(!shown)
       }}
