@@ -57,13 +57,12 @@ const CelestialData = (props: any) => {
 const SpaceMap = (props: any) => {
   const { height, width } = useWindowDimensions()
 
-  const CelestialDatas = props.system?.locations.map((loc: any) => {
+  const [CelestialDatas, Celestials] = 
+  [props.system?.locations?.map((loc: any) => {
     return (
       <CelestialData loc={loc}/>
     )
-  })
-
-  const Celestials = props.system?.locations.map((loc: any) => {
+  }), props.system?.locations?.map((loc: any) => {
     const x = loc.x
     const y = loc.y
     return (
@@ -78,7 +77,6 @@ const SpaceMap = (props: any) => {
           //Click either on the 2d, or div to toggle
           setActive(!active)
           _!.onclick = () => {
-            console.log('yeet')
             setActive(false) //this doesn't update the state here, so we have to remanually set the rest
             _!.style.zIndex = -10
             _!.style.opacity = 1
@@ -90,7 +88,8 @@ const SpaceMap = (props: any) => {
         }}
       />
     )
-  })
+  })]
+
 
   return (
     <div>

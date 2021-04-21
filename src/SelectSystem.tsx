@@ -21,7 +21,7 @@ const SelectSystem = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const systemsList = systems.systems.map((system: any) => {
+  const systemsList = systems?.systems?.map((system: any) => {
     return (
       <input
         key={system.name}

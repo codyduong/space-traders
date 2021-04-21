@@ -22,7 +22,7 @@ const Locations = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const locations = systemSelected?.locations.map((location: any) => {
+  const locations = systemSelected?.locations?.map((location: any) => {
     return (
       <div key={location.symbol}>
         {location.name}

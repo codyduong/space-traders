@@ -9,7 +9,8 @@ import SpaceMap from "./SpaceMap"
 import NavBar from "./NavBar"
 import Money from "./Money"
 import { useCookies } from "react-cookie"
-import { User } from "spacetraders-sdk/dist/types"
+import { useLocalStorage } from "./hooks/storageHooks"
+import { System, User } from "spacetraders-sdk/dist/types"
 import SpaceTradersExtend from "./spacetraders/spacetraders"
 
 const token = require('./token.json')
@@ -28,23 +29,21 @@ const Main = () => {
       .then(res => {
         console.log(res.user)
         setUser(res.user)
-        setCookie('user', res.user, { path: '/ ' })
+        setCookie('user', res.user, { path: '/ ', maxAge: 900 }) //every 15 minutes
       })
   }
 
-  const [systems, setSystems] = useState<SystemsResponse>(cookies.systems ?? systemsDefault)
+  const [systems, setSystems] = useLocalStorage<SystemsResponse>('systems')
   const updateSystems = (systems: any) => {
     spaceTraders.listSystemsFixed()
       .then(res => {
         console.log(res)
         setSystems(res)
         selectSystem(res.systems[0]) //The default system is the first selected one.
-        setCookie('selectedSystem', res.systems[0], { path: '/ ' })
-        setCookie('systems', res, { path: '/ ' })
       })
   } 
 
-  const [systemSelected, selectSystem] = useState<any>(cookies.selectedSystem ?? null)
+  const [systemSelected, selectSystem] = useLocalStorage<System>('systemSelected')
 
   useEffect(() => {
     if (!cookies.user) {
@@ -55,15 +54,13 @@ const Main = () => {
           setCookie('user', res.user, { path: '/ ' })
         })
     }
-    if (!cookies.systems) {
+    if (systems===null) {
       spaceTraders.listSystems()
         .then(res => {
           let _: any = res //A dumb workaround for bad typing on the sdk side
           console.log(_.systems[0])
           setSystems(_)
           selectSystem(_.systems[0]) //The default system is the first selected one.
-          setCookie('selectedSystem', _.systems[0], { path: '/ ' })
-          setCookie('systems', _, { path: '/ ' })
         })
     }
   }, [])
