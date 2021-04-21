@@ -22,7 +22,7 @@ const Ships = (props: any) => {
   })
 
   const {user} = useContext(userContext)
-  const ships = user.ships?.map((ship: any) => {
+  const ships = user?.ships?.map((ship: any) => {
     return (
       <div className="Ships_Singular" key={ship.id}>
         ID: {ship.id}<br/>

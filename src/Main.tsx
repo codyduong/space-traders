@@ -9,7 +9,7 @@ import SpaceMap from "./SpaceMap"
 import NavBar from "./NavBar"
 import Money from "./Money"
 import { useCookies } from "react-cookie"
-import { useLocalStorage } from "./hooks/storageHooks"
+import { useLocalStorage, useSessionStorage } from "./hooks/storageHooks"
 import { System, User } from "spacetraders-sdk/dist/types"
 import SpaceTradersExtend from "./spacetraders/spacetraders"
 
@@ -18,22 +18,19 @@ const spaceTraders = new SpaceTradersExtend()
 spaceTraders.init('duongc', `${token.token}`)
 
 const Main = () => {
-  const [cookies, setCookie, removeCookie] = useCookies(['user', 'systems'])
-  // const [settings, setSettings] = useState<any>(settingsDefault)
-  // const toggleTheme = () => {
+  const [cookies, setCookie, removeCookie] = useCookies(['session'])
+  const session = cookies.session ?? null
 
-  // }
-  const [user, setUser] = useState<User>(cookies.user ?? userDefault)
+  const [user, setUser] = useLocalStorage<User>('user')
   const updateUser = (user: User) => {
     spaceTraders.getAccount()
       .then(res => {
         console.log(res.user)
         setUser(res.user)
-        setCookie('user', res.user, { path: '/ ', maxAge: 900 }) //every 15 minutes
       })
   }
 
-  const [systems, setSystems] = useLocalStorage<SystemsResponse>('systems')
+  const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
   const updateSystems = (systems: any) => {
     spaceTraders.listSystemsFixed()
       .then(res => {
@@ -43,18 +40,17 @@ const Main = () => {
       })
   } 
 
-  const [systemSelected, selectSystem] = useLocalStorage<System>('systemSelected')
+  const [systemSelected, selectSystem] = useSessionStorage<System>('systemSelected')
 
   useEffect(() => {
-    if (!cookies.user) {
+    if (user===null || session===null) {
       spaceTraders.getAccount()
         .then(res => {
           console.log(res)
           setUser(res.user)
-          setCookie('user', res.user, { path: '/ ' })
         })
     }
-    if (systems===null) {
+    if (systems===null || session===null) {
       spaceTraders.listSystems()
         .then(res => {
           let _: any = res //A dumb workaround for bad typing on the sdk side
@@ -62,6 +58,9 @@ const Main = () => {
           setSystems(_)
           selectSystem(_.systems[0]) //The default system is the first selected one.
         })
+    }
+    if (session===null) {
+      setCookie('session', '', { path: '/ ', maxAge: 900})
     }
   }, [])
 

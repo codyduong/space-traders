@@ -32,7 +32,7 @@ const Money = () => {
               setShown(!shown)
             }}
           >
-            Credits: {user.credits}
+            Credits: {user?.credits}
           </div>
           <animated.div style={animate}>
             words
