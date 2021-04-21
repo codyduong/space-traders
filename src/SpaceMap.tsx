@@ -40,7 +40,7 @@ const Celestial = (props: any) => {
 }
 
 const CelestialData = (props: any) => {
-  const [shown, setShown] = useState(false)
+  const [shown, setShown] = useState<boolean>(false)
 
   return (
     <div 

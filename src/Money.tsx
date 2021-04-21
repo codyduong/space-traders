@@ -4,9 +4,9 @@ import { animated, useSpring } from "react-spring"
 import "./css/Money.css"
 
 const Money = () => {
-  const [shown, setShown] = useState(false)
 
-  const [init, setInit] = useState(false)
+  const [shown, setShown] = useState<boolean>(false)
+  const [init, setInit] = useState<boolean>(false)
   useEffect(()=>{
     setInit(true)
   }, [])

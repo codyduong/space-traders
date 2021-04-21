@@ -4,9 +4,9 @@ import { animated, useSpring } from "react-spring"
 
 const SelectSystem = (props: any) => {
   const { systems, systemSelected, selectSystem } = useContext(systemsContext)
-  const [shown, setShown]  = useState(false)
-
-  const [init, setInit] = useState(false)
+  
+  const [shown, setShown]  = useState<boolean>(false)
+  const [init, setInit] = useState<boolean>(false)
   useEffect(()=>{
     setInit(true)
   }, [])
