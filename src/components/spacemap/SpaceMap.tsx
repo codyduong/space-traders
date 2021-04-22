@@ -1,99 +1,65 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useState, useContext } from "react"
 import "./css/SpaceMap.css"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import * as THREE from 'three'
-import { colors, scale } from "./css/SpaceMap"
-import useWindowDimensions from "../../hooks/useWindowDimensions"
-import { Plane, Line, Stars } from "@react-three/drei"
-
-const Celestial = (props: any) => {
-  const mesh = useRef<THREE.Mesh>(null!)
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-
-  //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
-
-  // @ts-ignore: i can not be assed to interface and type just for colors
-  const _c: any = colors[props.type]
-  // @ts-ignore: ditto
-  const _s: number = scale[props.type]
-
-  return (
-    <mesh 
-      {...props}
-      ref={mesh} 
-      scale={active ? 1.5*_s : _s}
-      onClick={(event) => {
-        setActive(!active)
-        props.clickExtension(event.pageX, event.pageY, [active, setActive])
-      }}
-      onPointerOver={(event) => {
-        setHover(true)
-        console.log(props.name)
-      }}
-      onPointerOut={(event) => setHover(false)}
-    >
-      {props.type==="WORMHOLE"} ? <></> : <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial attach="material" roughness={0.5} color={_c}  />
-    </mesh>
-  )
-}
-
-const CelestialData = (props: any) => {
-  const [shown, setShown] = useState<boolean>(false)
-
-  return (
-    <div 
-      className="SpaceMap_SelectedLocation" 
-      id={props.loc.name}
-    >
-      {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
-      {String(`(${props.loc.x}, ${props.loc.y})`)}
-    </div>
-  )
-}
+import { Canvas } from "@react-three/fiber"
+import { Plane, Stars } from "@react-three/drei"
+import Celestial from "./Celestial"
+import CelestialData from "./CelestialData"
+import { celestialContext } from "./celestialContext"
+import { Location } from "spacetraders-sdk/dist/types"
+import { CelestialIndexer } from "./c_types"
 
 const SpaceMap = (props: any) => {
-  const { height, width } = useWindowDimensions()
+  const [celestialIndexer, setCelestialIndexer] = useState<CelestialIndexer[]>([])
+  //I pray I never have to attempt to understand the context happening here.
+  const sCI = (f: React.Dispatch<React.SetStateAction<boolean>>, n: number, s: string) => {
+    let _: any[] = celestialIndexer
+    let f1: React.Dispatch<React.SetStateAction<boolean>> = _[n]?.setCelestialActive!
+    let f2: React.Dispatch<React.SetStateAction<boolean>> = _[n]?.setCelestialDataActive!
+    //console.log(s, s==="setCelestialActive", s==="setCelestialDataActive", n)
+    if (s==="setCelestialActive") {f1=f} 
+    else if (s==="setCelestialDataActive") {f2=f}
+    let __: CelestialIndexer = {setCelestialActive: f1, setCelestialDataActive: f2}
+    _[n] = __
+    setCelestialIndexer(_)
+    console.log(celestialIndexer)
+  }
 
-  const [CelestialDatas, Celestials] = 
-  [props.system?.locations?.map((loc: any) => {
-    return (
-      <CelestialData key={`${loc.symbol}_DATA`} loc={loc}/>
-    )
-  }), props.system?.locations?.map((loc: any) => {
-    const x = loc.x
-    const y = loc.y
-    return (
-      <Celestial 
-        key={loc.symbol} 
-        position={[x , y, 0]} 
-        name={loc.name} 
-        type={loc.type}
-        clickExtension={(x: string, y: string, useState: any) => {
-          let _: any = document.getElementById(loc.name)
-          let [active, setActive] = useState
-          //Click either on the 2d, or div to toggle
-          setActive(!active)
-          _!.onclick = () => {
-            setActive(false) //this doesn't update the state here, so we have to remanually set the rest
-            _!.style.zIndex = -10
-            _!.style.opacity = 1
-          }
-          let [ w_ratio, h_ratio ] = [Number(x)/width, Number(y)/height]
-          _!.style.transform = `translate(${w_ratio * 100}vw, ${h_ratio * 100}vh)`
-          _!.style.zIndex = active ? -10 : 10
-          _!.style.opacity = active ? '0' : '1'
-        }}
-      />
-    )
+  const [CelestialDatas, Celestials] = [props.system?.locations?.map((loc: Location, index: number) => {
+    const __ = <CelestialData 
+      key={`${loc.symbol}_DATA`} 
+      index={index}
+      loc={loc}
+    />
+    return __
+  }), props.system?.locations?.map((loc: Location, index: number) => {
+    const __ = <Celestial 
+      key={loc.symbol}
+      index={index}
+      position={[loc.x, loc.y, 0]}
+      name={loc.name}
+      type={loc.type}
+    />
+    return __
   })]
 
+  // FUCK https://github.com/pmndrs/react-three-fiber/issues/262
+  // @ts-ignore : we just gonna do this.
+  function ForwardCanvas({ children }) {
+    const value = useContext(celestialContext)
+    return (
+      <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
+        <celestialContext.Provider value={value}>
+          {children}
+        </celestialContext.Provider>
+      </Canvas>
+    )
+  }
 
   return (
+    <celestialContext.Provider value={{celestialIndexer: celestialIndexer, setCelestialIndexer: sCI}}> 
     <div>
       <div className="SpaceMap_Canvas">
-        <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
+        <ForwardCanvas>
           <ambientLight />
           <Plane position={[0, 0, -300]} args={[3000, 3000, 4, 4]}>
             <meshBasicMaterial color="black" />
@@ -103,19 +69,14 @@ const SpaceMap = (props: any) => {
             factor={1}
             count={300}
           />
-          {/* <Line 
-            points={[[-1000, 0, -9.9], [1000, 0, -9.9]]}
-            color="hsl(0, 100%, 25%)"
-          />
-          <Line 
-            points={[[0, -1000, -9.9], [0, 1000, -9.9]]}
-            color="hsl(100, 100%, 10%)"
-          /> */}
+          {/* Have to seperately provide the context inside canvas */}
+          
           {Celestials}
-        </Canvas>
+        </ForwardCanvas>
       </div>
       {CelestialDatas}
     </div>
+    </celestialContext.Provider>
   )
 }
 
