@@ -11,12 +11,13 @@ import NavBar from "./components/navbar/NavBar"
 import Money from "./components/money/Money"
 import { useCookies } from "react-cookie"
 import { useLocalStorage, useSessionStorage } from "./hooks/storageHooks"
-import { System, User } from "spacetraders-sdk/dist/types"
+import { System, User, SystemsResponse } from "spacetraders-sdk/dist/types"
 import { UserCred } from "./types"
-import SpaceTradersExtend, { SystemsResponse } from "./spacetraders/spacetraders"
+//import SpaceTradersExtend, { SystemsResponse } from "./spacetraders/spacetraders"
+import { SpaceTraders } from "spacetraders-sdk"
 import { AuthenticationError } from "spacetraders-sdk/dist/errors"
 
-const spaceTraders = new SpaceTradersExtend()
+const spaceTraders = new SpaceTraders()
 
 const Main = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['session'])
@@ -44,7 +45,7 @@ const Main = () => {
 
   const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
   const updateSystems = (systems: any) => {
-    userCred && spaceTraders.listSystemsFixed()
+    userCred && spaceTraders.listSystems()
       .then(res => {
         console.log(res)
         setSystems(res)
