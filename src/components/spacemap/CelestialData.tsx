@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import { celestialContext } from "./celestialContext"
+import Draggable from "react-draggable"
 
 export interface dataActiveState {
   active: boolean,
@@ -32,24 +33,26 @@ const CelestialData = (props: any) => {
   }, [])
   
   const style = {
-    transform: `translate(${active?.x/xy.x * 100}vw, ${active?.y/xy.y * 100}vh)`,
+    // transform: `translate(${active?.x/xy.x * 100}vw, ${active?.y/xy.y * 100}vh)`,
     zIndex: active?.active ? 10 : -10,
     opacity: active?.active ? 1 : 0,
   }
 
   return (
-    <div
-      className="SpaceMap_SelectedLocation"
-      id={props.loc.name}
-      style={style}
-      onClick={()=>{
-        setActive({active: !active.active, x: 0, y: 0})
-        celestialIndexer[props.index].setCelestialActive(false)
-      }}
-    >
-      {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
-      {String(`(${props.loc.x}, ${props.loc.y})`)}
-    </div>
+    <Draggable positionOffset={{x: active?.x, y: active?.y}}>
+      <div
+        className="SpaceMap_SelectedLocation"
+        id={props.loc.name}
+        style={style}
+        onClick={()=>{
+          //setActive({active: !active.active, x: 0, y: 0})
+          //celestialIndexer[props.index].setCelestialActive(false)
+        }}
+      >
+        {String(`[${props.loc.symbol}] ${props.loc.name}`)} <br></br>
+        {String(`(${props.loc.x}, ${props.loc.y})`)}
+      </div>
+    </Draggable>
   )
 }
 
