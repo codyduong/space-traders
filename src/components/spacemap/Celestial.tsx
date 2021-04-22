@@ -28,8 +28,8 @@ const Celestial = (props: any) => {
       ref={mesh}
       scale={active ? 1.5 * _s : _s}
       onClick={(event) => {
+        celestialIndexer[props.index].setCelestialDataActive({active: !active, x: event.pageX, y: event.pageY})
         setActive(!active)
-        celestialIndexer[props.index].setCelestialDataActive({active: true, x: event.pageX, y: event.pageY})
       }}
       onPointerOver={(event) => {
         setHover(true)
