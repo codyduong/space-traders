@@ -29,7 +29,7 @@ const Celestial = (props: any) => {
       scale={active ? 1.5 * _s : _s}
       onClick={(event) => {
         setActive(!active)
-        celestialIndexer[props.index].setCelestialDataActive(true)
+        celestialIndexer[props.index].setCelestialDataActive({active: true, x: event.pageX, y: event.pageY})
       }}
       onPointerOver={(event) => {
         setHover(true)

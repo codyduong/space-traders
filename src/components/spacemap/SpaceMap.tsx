@@ -3,7 +3,7 @@ import "./css/SpaceMap.css"
 import { Canvas } from "@react-three/fiber"
 import { Plane, Stars } from "@react-three/drei"
 import Celestial from "./Celestial"
-import CelestialData from "./CelestialData"
+import CelestialData, { dataActiveState } from "./CelestialData"
 import { celestialContext } from "./celestialContext"
 import { Location } from "spacetraders-sdk/dist/types"
 import { CelestialIndexer } from "./c_types"
@@ -11,17 +11,17 @@ import { CelestialIndexer } from "./c_types"
 const SpaceMap = (props: any) => {
   const [celestialIndexer, setCelestialIndexer] = useState<CelestialIndexer[]>([])
   //I pray I never have to attempt to understand the context happening here.
-  const sCI = (f: React.Dispatch<React.SetStateAction<boolean>>, n: number, s: string) => {
+  const sCI = (f: React.Dispatch<React.SetStateAction<any>>, n: number, s: string) => {
     let _: any[] = celestialIndexer
     let f1: React.Dispatch<React.SetStateAction<boolean>> = _[n]?.setCelestialActive!
-    let f2: React.Dispatch<React.SetStateAction<boolean>> = _[n]?.setCelestialDataActive!
+    let f2: React.Dispatch<React.SetStateAction<dataActiveState>> = _[n]?.setCelestialDataActive!
     //console.log(s, s==="setCelestialActive", s==="setCelestialDataActive", n)
     if (s==="setCelestialActive") {f1=f} 
     else if (s==="setCelestialDataActive") {f2=f}
     let __: CelestialIndexer = {setCelestialActive: f1, setCelestialDataActive: f2}
     _[n] = __
     setCelestialIndexer(_)
-    console.log(celestialIndexer)
+    //console.log(celestialIndexer)
   }
 
   const [CelestialDatas, Celestials] = [props.system?.locations?.map((loc: Location, index: number) => {
@@ -69,8 +69,6 @@ const SpaceMap = (props: any) => {
             factor={1}
             count={300}
           />
-          {/* Have to seperately provide the context inside canvas */}
-          
           {Celestials}
         </ForwardCanvas>
       </div>

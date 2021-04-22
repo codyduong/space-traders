@@ -6,5 +6,5 @@ const _: CelestialIndexer[] = []
 
 export const celestialContext = createContext({
   celestialIndexer: _,
-  setCelestialIndexer: (f: React.Dispatch<React.SetStateAction<boolean>>, n: number, s: string) => { },
+  setCelestialIndexer: (f: React.Dispatch<React.SetStateAction<any>>, n: number, s: string) => { },
 })
