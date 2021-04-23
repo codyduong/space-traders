@@ -57,7 +57,7 @@ const SpaceMap = (props: any) => {
 
   return (
     <celestialContext.Provider value={{celestialIndexer: celestialIndexer, setCelestialIndexer: sCI}}> 
-    <div>
+    <div className="SpaceMap_Main">
       <div className="SpaceMap_Canvas">
         <ForwardCanvas>
           <ambientLight />

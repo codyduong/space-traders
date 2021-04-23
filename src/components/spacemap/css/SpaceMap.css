@@ -9,6 +9,10 @@
   --y-axis: hsl(100, 100%, 10%);
 }
 
+.SpaceMap_Main {
+  overflow: hidden;
+}
+
 .SpaceMap_Canvas {
   display: block;
   overflow-x: visible;

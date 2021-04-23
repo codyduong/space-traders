@@ -16,12 +16,12 @@ interface ratios {
 
 const CelestialData = (props: any) => {
   const [active, setActive] = useState<dataActiveState>({active: false, x: 0, y: 0})
-  const [xy, setRatios] = useState<ratios>({x: 1, y: 1})
+  const [ratio, setRatios] = useState<ratios>({x: 0, y: 0})
   const { height, width } = useWindowDimensions()
 
   useEffect(() => {
     if (active?.active===true) {
-      setRatios({x: width, y: height})
+      setRatios({x: active?.x/width, y: active?.y/height})
     }
   }, [active])
 
@@ -39,7 +39,7 @@ const CelestialData = (props: any) => {
   }
 
   return (
-    <Draggable positionOffset={{x: active?.x, y: active?.y}}>
+    <Draggable positionOffset={{x: ratio?.x*width, y: ratio?.y*height}}>
       <div
         className="SpaceMap_SelectedLocation"
         id={props.loc.name}
