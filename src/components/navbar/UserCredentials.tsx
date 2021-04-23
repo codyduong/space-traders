@@ -27,7 +27,7 @@ const UserCredentials = () => {
     <div>
       <input 
         type="button"
-        defaultValue={shown ? `${userCred.username} ▲` : `${userCred.username} ▼`}
+        defaultValue={shown ? `${userCred?.username} ▲` : `${userCred?.username} ▼`}
         onClick={()=>{setShown(!shown)}}
       ></input>
       <animated.div style={animate}>
