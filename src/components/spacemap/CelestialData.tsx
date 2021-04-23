@@ -17,6 +17,9 @@ interface ratios {
 
 const CelestialData = (props: any) => {
   const [active, setActive] = useState<dataActiveState>({active: false, x: 0, y: 0})
+  const [shown, setShown] = useState<boolean>(false)
+  const [hoverQuit, setHoverQuit] = useState<boolean>(false)
+  const [hoverMove, setHoverMove] = useState<boolean>(false)
   const [ratio, setRatios] = useState<ratios>({x: 0, y: 0})
   const { height, width } = useWindowDimensions()
 
@@ -33,16 +36,14 @@ const CelestialData = (props: any) => {
     setCelestialIndexer(setActive, props.index, "setCelestialDataActive")
   }, [])
 
-  const [shown, setShown] = useState<boolean>(false)
   const animate = useSpring({
     opacity: 1,
     reset: false,
     delay: 0,
-    reverse: !shown,
+    reverse: shown,
     overflow: 'hidden',
-    maxWidth: '0em',
     maxHeight: '0em',
-    from: { maxWidth: '30em', maxHeight: '30em'},
+    from: { maxHeight: '30em'},
   })
   
   const style = {
@@ -67,27 +68,44 @@ const CelestialData = (props: any) => {
         className="SpaceMap_SelectedLocation"
         id={props.loc.name}
         style={style}
-        onClick={() => {
-          //setActive({active: !active.active, x: 0, y: 0})
-          //celestialIndexer[props.index].setCelestialActive(false)
-        }}
       >
-        <span>
-          <div className="SpaceMap_Tab">
-            <div className="SpaceMap_Name">
+        <div className="SpaceMap_Tab">
+          <span>
+            <div
+              className="SpaceMap_Name"
+              style={{ cursor: hoverMove ? 'move' : 'auto' }}
+              onMouseOver={() => { setHoverMove(!hoverMove) }}
+              onMouseOut={() => { setHoverMove(!hoverMove) }}
+            >
               {String(`[${props.loc.symbol}] ${props.loc.name}`)}
             </div>
-            <div className="SpaceMap_NavBar">
-              <div className="SpaceMap_Mini">
-                {shown ? '-' : '☐'}
-              </div>
-              <div className="SpaceMap_Quit">
-                X
-              </div>
+          </span>
+          <div className="SpaceMap_NavBar">
+            <div
+              className="SpaceMap_Mini"
+              onClick={() => {
+                setShown(!shown)
+              }}
+            >
+              {shown ? '-' : '☐'}
             </div>
+            <div
+              className="SpaceMap_Quit"
+              style={{ backgroundColor: hoverQuit ? 'hsl(0, 100%, 75%)' : '' }}
+              onMouseOver={() => { setHoverQuit(!hoverQuit) }}
+              onMouseOut={() => { setHoverQuit(!hoverQuit) }}
+              onClick={() => {
+                setActive({ active: !active.active, x: 0, y: 0 })
+                celestialIndexer[props.index].setCelestialActive(false)
+              }}
+            >
+              X
+              </div>
           </div>
-        </span>
-        {String(`(${props.loc.x}, ${props.loc.y})`)}
+        </div>
+        <animated.div style={animate}>
+          {String(`Coordinates: (X: ${props.loc.x}, Y: ${props.loc.y})`)}
+        </animated.div>
       </div>
     </Draggable>
   )
