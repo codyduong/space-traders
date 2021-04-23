@@ -41,7 +41,8 @@
 }
 
 .SpaceMap_Tab {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 3em;
   height: 1.5em;
   padding: 0 0 0 0;
   background-color: hsla(0, 0%, 100%, 1);
