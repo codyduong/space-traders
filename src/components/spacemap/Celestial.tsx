@@ -23,7 +23,7 @@ const Celestial = (props: any) => {
   // @ts-ignore: ditto
   const _s: number = scale[props.type] ?? 1
 
-  return props.type==="WORMHOLE" ? (
+  return false ? ( //props.type==="WORMHOLE"
     <Wormhole position={props.position} />
   ) : (
     <mesh
