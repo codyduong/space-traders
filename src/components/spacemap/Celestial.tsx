@@ -2,6 +2,7 @@ import { useState, useRef, useContext, useEffect } from "react"
 import { colors, scale } from "./css/SpaceMap"
 import * as THREE from 'three'
 import { celestialContext } from "./celestialContext"
+import Wormhole from "./Wormhole"
 
 const Celestial = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
@@ -22,7 +23,9 @@ const Celestial = (props: any) => {
   // @ts-ignore: ditto
   const _s: number = scale[props.type] ?? 1
 
-  return (
+  return props.type==="WORMHOLE" ? (
+    <Wormhole position={props.position} />
+  ) : (
     <mesh
       {...props}
       ref={mesh}
@@ -36,7 +39,7 @@ const Celestial = (props: any) => {
       }}
       onPointerOut={(event) => setHover(false)}
     >
-      {props.type === "WORMHOLE"} ? <></> : <sphereGeometry args={[1, 32, 32]} />
+      <sphereGeometry args={[1, 32, 32]} />
       <meshStandardMaterial attach="material" roughness={0.5} color={_c} />
     </mesh>
   )
