@@ -3,6 +3,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions"
 import { celestialContext } from "./celestialContext"
 import Draggable from "react-draggable"
 import { animated, useSpring } from "react-spring"
+import "./css/CelestialData.css"
 
 export interface dataActiveState {
   active: boolean,
@@ -65,14 +66,14 @@ const CelestialData = (props: any) => {
     >
       <div
         ref={ref}
-        className="SpaceMap_SelectedLocation"
+        className="CelesitalData_Main"
         id={props.loc.name}
         style={style}
       >
-        <div className="SpaceMap_Tab">
+        <div className="CelesitalData_Tab">
           <span>
             <div
-              className="SpaceMap_Name"
+              className="CelesitalData_Name"
               style={{ cursor: hoverMove ? 'move' : 'auto' }}
               onMouseOver={() => { setHoverMove(!hoverMove) }}
               onMouseOut={() => { setHoverMove(!hoverMove) }}
@@ -80,9 +81,9 @@ const CelestialData = (props: any) => {
               {String(`[${props.loc.symbol}] ${props.loc.name}`)}
             </div>
           </span>
-          <div className="SpaceMap_NavBar">
+          <div className="CelesitalData_NavBar">
             <div
-              className="SpaceMap_Mini"
+              className="CelesitalData_Mini"
               onClick={() => {
                 setShown(!shown)
               }}
@@ -90,7 +91,7 @@ const CelestialData = (props: any) => {
               {shown ? '-' : '☐'}
             </div>
             <div
-              className="SpaceMap_Quit"
+              className="CelesitalData_Quit"
               style={{ backgroundColor: hoverQuit ? 'hsl(0, 100%, 75%)' : '' }}
               onMouseOver={() => { setHoverQuit(!hoverQuit) }}
               onMouseOut={() => { setHoverQuit(!hoverQuit) }}
@@ -105,6 +106,11 @@ const CelestialData = (props: any) => {
         </div>
         <animated.div style={animate}>
           {String(`Coordinates: (X: ${props.loc.x}, Y: ${props.loc.y})`)}
+          <div
+            className="CelesitalData_SurplusData"
+          >
+            
+          </div>
         </animated.div>
       </div>
     </Draggable>
