@@ -4,13 +4,13 @@ import SelectSystem from "./SelectSystem"
 import Ships from "./Ships"
 import Locations from "./Locations"
 
-const NavBar = (props: any) => {
+const NavBar = () => {
 
   return (
     <div className="NavBar_Main">
       <div className="NavBar_Buttons">
         <UserCredentials />
-        <SelectSystem selectSystem={props.selectSystem}/>
+        <SelectSystem/>
         <Ships />
         <Locations />
       </div>

@@ -18,9 +18,9 @@ const Celestial = (props: any) => {
   //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
 
   // @ts-ignore: i can not be assed to interface and type just for colors
-  const _c: any = colors[props.type]
+  const _c: any = colors[props.type] ?? "rgb(255,255,255)"
   // @ts-ignore: ditto
-  const _s: number = scale[props.type]
+  const _s: number = scale[props.type] ?? 1
 
   return (
     <mesh

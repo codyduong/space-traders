@@ -6,7 +6,7 @@ import { userContext } from "./context/userContext"
 import { systemsContext } from "./context/systemsContext"
 import { userCredContext } from "./context/userCredContext"
 // import systemsInterface from "./interfaces/systems"
-import SpaceMap from "./components/spacemap/SpaceMap"
+import SystemsManager from "./components/spacemap/SystemsManager"
 import NavBar from "./components/navbar/NavBar"
 import Money from "./components/money/Money"
 import { useCookies } from "react-cookie"
@@ -49,11 +49,10 @@ const Main = () => {
       .then(res => {
         console.log(res)
         setSystems(res)
-        selectSystem(res.systems[0]) //The default system is the first selected one.
       })
   } 
 
-  const [systemSelected, selectSystem] = useSessionStorage<System>('systemSelected')
+  const [systemSelected, selectSystem] = useSessionStorage<number>('systemSelected') ?? 0
 
   useEffect(() => {
     if (userCred) {
@@ -67,10 +66,8 @@ const Main = () => {
       if (systems===null || session===null) {
         spaceTraders.listSystems()
           .then(res => {
-            let _: any = res //A dumb workaround for bad typing on the sdk side
-            console.log(_.systems[0])
-            setSystems(_)
-            selectSystem(_.systems[0]) //The default system is the first selected one.
+            console.log(res)
+            setSystems(res)
           })
       }
     }
@@ -84,12 +81,10 @@ const Main = () => {
     <userContext.Provider value={{user: user, updateUser: updateUser}}>
     <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem}}>
     <div className="Main">
-      <SpaceMap system={systemSelected} />
-      <div className="Main_Margin">
-        <div className="Main_ResponsiveGrid">
-          <NavBar />
-          <Money />
-        </div>
+      <SystemsManager />
+      <div className="Main_ResponsiveGrid">
+        <NavBar />
+        <Money />
       </div>
     </div>
     </systemsContext.Provider>

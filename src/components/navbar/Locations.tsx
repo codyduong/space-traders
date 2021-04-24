@@ -4,7 +4,7 @@ import { systemsContext } from "../../context/systemsContext"
 import "./css/Locations.css"
 
 const Locations = (props: any) => {
-  const { systemSelected } = useContext(systemsContext)
+  const { systems, systemSelected } = useContext(systemsContext)
   const [shown, setShown] = useState(false)
 
   const [init, setInit] = useState(false)
@@ -22,7 +22,7 @@ const Locations = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const locations = systemSelected?.locations?.map((location: any) => {
+  const locations = systems?.systems[systemSelected]?.locations.map((location: any) => {
     return (
       <div key={location.symbol}>
         {location.name}

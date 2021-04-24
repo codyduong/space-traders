@@ -1,23 +1,16 @@
 .Main {
   display: block;
-  width: auto;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.Main_Margin {
-  width: 95vw;
-  padding-top: 25px;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: -20;
+  width: 0;
+  height: 0;
+  overflow-x: visible;
+  overflow-y: visible;
+  z-index: -1000;
 }
 
 .Main_ResponsiveGrid {
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33vw 33vw 33vw;
   grid-template-rows: auto;
+  overflow: visible;
+  overflow: visible;
 }

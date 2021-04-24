@@ -7,8 +7,10 @@ import CelestialData, { dataActiveState } from "./CelestialData"
 import { celestialContext } from "./celestialContext"
 import { Location } from "spacetraders-sdk/dist/types"
 import { CelestialIndexer } from "./c_types"
+import { systemsContext } from "../../context/systemsContext"
 
 const SpaceMap = (props: any) => {
+  const { systemSelected } = useContext(systemsContext)
   const [celestialIndexer, setCelestialIndexer] = useState<CelestialIndexer[]>([])
   //I pray I never have to attempt to understand the context happening here.
   const sCI = (f: React.Dispatch<React.SetStateAction<any>>, n: number, s: string) => {
@@ -57,7 +59,10 @@ const SpaceMap = (props: any) => {
 
   return (
     <celestialContext.Provider value={{celestialIndexer: celestialIndexer, setCelestialIndexer: sCI}}> 
-    <div className="SpaceMap_Main">
+    <div 
+      className="SpaceMap_Main" 
+      style={{zIndex: systemSelected===props.index ? -10 : -100}}
+    >
       <div className="SpaceMap_Canvas">
         <ForwardCanvas>
           <ambientLight />

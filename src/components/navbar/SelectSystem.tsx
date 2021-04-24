@@ -2,7 +2,7 @@ import { useState, useContext, useEffect} from "react"
 import { systemsContext } from "../../context/systemsContext"
 import { animated, useSpring } from "react-spring"
 
-const SelectSystem = (props: any) => {
+const SelectSystem = () => {
   const { systems, systemSelected, selectSystem } = useContext(systemsContext)
   
   const [shown, setShown]  = useState<boolean>(false)
@@ -21,7 +21,7 @@ const SelectSystem = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const systemsList = systems?.systems?.map((system: any) => {
+  const systemsList = systems?.systems?.map((system: any, index: number) => {
     return (
       <input
         key={system.name}
@@ -29,7 +29,7 @@ const SelectSystem = (props: any) => {
         type="Button"
         defaultValue={system.name}
         onClick={() => {
-          selectSystem(system)
+          selectSystem(index)
         }}
       ></input>
     )
@@ -40,7 +40,7 @@ const SelectSystem = (props: any) => {
     <input
       className="SelectSystem_Button"
       type="Button"
-      defaultValue={shown ? `Select System ▲: ${systemSelected?.name}` : `Select System ▼: ${systemSelected?.name}`}
+      defaultValue={shown ? `Select System ▲: ${systems?.systems[systemSelected]?.name}` : `Select System ▼: ${systems?.systems[systemSelected]?.name}`}
       onClick={() => {
         setShown(!shown)
       }}

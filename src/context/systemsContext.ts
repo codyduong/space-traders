@@ -5,11 +5,7 @@ export const systemsDefault: SystemsResponse = {
   systems: []
 }
 
-export const systemSelectedDefault: System = {
-  name: "",
-  symbol: "",
-  locations: [],
-}
+export const systemSelectedDefault: number = 0
 
 export const systemsContext = createContext({
   systems: systemsDefault,
