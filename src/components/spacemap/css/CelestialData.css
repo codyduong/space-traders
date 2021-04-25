@@ -11,7 +11,7 @@
   
   .CelesitalData_Tab {
     display: grid;
-    grid-template-columns: auto 3em;
+    grid-template-columns: auto 3.5em;
     height: 1.5em;
     padding: 0 0 0 0;
     background-color: hsla(0, 0%, 100%, 1);
@@ -49,4 +49,8 @@
     /* border: solid;
     border-color: hsl(0, 0%, 0%);
     border-width: .125em; */
+  }
+
+  .CelestialData_Surplus {
+    display: grid;
   }
