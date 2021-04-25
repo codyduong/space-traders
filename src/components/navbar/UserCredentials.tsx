@@ -6,6 +6,7 @@ const UserCredentials = () => {
   const {userCred, updateUserCred} = useContext(userCredContext)
   const [user, setUser] = useState<string>(userCred?.username ?? '')
   const [toke, setToke] = useState<string>(userCred?.token ?? '')
+  const [showToke, setShowToke] = useState<boolean>(false)
   
   const [shown, setShown]  = useState<boolean>(false)
   const [init, setInit] = useState<boolean>(false)
@@ -43,11 +44,17 @@ const UserCredentials = () => {
         <input
           className="UserCredentials_Text"
           id="toke"
-          type="text"
+          type={showToke ? "password" : "text"}
           onChange={(event: any)=>{setToke(event.target.value)}}
-          placeholder={toke}
+          value={toke}
+        ></input>
+        <input
+          className="UserCredentials_Button"
+          id="toke"
+          type="button"
+          value={showToke ? "Show" : "Hide"}
+          onClick={()=>{setShowToke(!showToke)}}
         ></input><br />
-        <label htmlFor="submit"></label>
         <input
           className="UserCredentials_Button"
           id="submit"
