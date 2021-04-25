@@ -91,7 +91,7 @@ const CelestialData = (props: any) => {
               {shown ? '-' : '☐'}
             </div>
             <div
-              className="CelesitalData_Quit"
+              className="CelestialData_Quit"
               style={{ backgroundColor: hoverQuit ? 'hsl(0, 100%, 75%)' : '' }}
               onMouseOver={() => { setHoverQuit(!hoverQuit) }}
               onMouseOut={() => { setHoverQuit(!hoverQuit) }}
