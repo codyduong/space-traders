@@ -45,8 +45,7 @@ const SpaceMap = (props: any) => {
   })]
 
   // FUCK https://github.com/pmndrs/react-three-fiber/issues/262
-  // @ts-ignore : we just gonna do this.
-  function ForwardCanvas({ children }) {
+  function ForwardCanvas({ children }: any) {
     const value = useContext(celestialContext)
     return (
       <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
