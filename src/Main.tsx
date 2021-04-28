@@ -52,7 +52,7 @@ const Main = () => {
       })
   } 
 
-  const [systemSelected, selectSystem] = useSessionStorage<number>('systemSelected') ?? 0
+  const [systemSelected, selectSystem] = useSessionStorage<number>('systemSelected')
 
   useEffect(() => {
     if (userCred) {
@@ -73,6 +73,10 @@ const Main = () => {
     }
     if (session===null) {
       setCookie('session', '', { path: '/ ', maxAge: 900})
+      setInterval(() => {setCookie('session', null, { path: '/ ', maxAge: -1})}, 900000)
+    }
+    if (systemSelected===null) {
+      selectSystem(0)
     }
   }, [userCred, systems, user, session])
 
