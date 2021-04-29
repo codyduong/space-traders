@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react"
 import { animated, useSpring } from "react-spring"
+import { Location } from "spacetraders-sdk/dist/types"
+import { stateContext } from "../../context/stateContext"
 import { systemsContext } from "../../context/systemsContext"
 import "./css/Locations.css"
 
@@ -22,10 +24,19 @@ const Locations = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const locations = systems?.systems[systemSelected]?.locations.map((location: any) => {
+  const { state } = useContext(stateContext)
+
+  const locations = systems?.systems[systemSelected]?.locations.map((location: Location, index: number) => {
     return (
       <div key={location.symbol}>
         {location.name}
+        <input
+          type="button"
+          value="Select"
+          onClick={()=>{
+            state[location.symbol]['setDataActive'](true)
+          }}
+        ></input>
       </div>
     )
   })

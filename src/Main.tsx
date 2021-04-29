@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext, createContext } from "react"
 import "./css/Main.css"
 // import { settingsDefault, settingsContext } from "./context/settingsContext"
 // import settingsInterface from "./interfaces/settings"
@@ -16,6 +16,8 @@ import { UserCred } from "./types"
 //import SpaceTradersExtend, { SystemsResponse } from "./spacetraders/spacetraders"
 import { SpaceTraders } from "spacetraders-sdk"
 import { AuthenticationError } from "spacetraders-sdk/dist/errors"
+import { dataActiveState } from "./components/spacemap/CelestialData"
+import { stateContext } from "./context/stateContext"
 
 const spaceTraders = new SpaceTraders()
 
@@ -80,10 +82,21 @@ const Main = () => {
     }
   }, [userCred, systems, user, session])
 
+  const [stateCurrent, setStateCurrent] = useState<Record<string, Record<string, React.Dispatch<React.SetStateAction<any>>>>>({})
+  //I pray I never have to attempt to understand the context happening here.
+  const sSC = (name: string, functionName: string , f: React.Dispatch<React.SetStateAction<any>>) => {
+    //LOL good luck with this
+    let _: Record<string, Record<string, React.Dispatch<React.SetStateAction<any>>>> = stateCurrent
+    _[name] = stateCurrent[name] ?? {}
+    _[name][functionName] = f
+    setStateCurrent(_)
+  }
+
   return (
     <userCredContext.Provider value={{userCred: userCred, updateUserCred: setUserCred}}>
     <userContext.Provider value={{user: user, updateUser: updateUser}}>
     <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem}}>
+    <stateContext.Provider value={{state: stateCurrent, set: sSC}}>
     <div className="Main">
       <SystemsManager />
       <div className="Main_ResponsiveGrid">
@@ -91,6 +104,7 @@ const Main = () => {
         <Money />
       </div>
     </div>
+    </stateContext.Provider>
     </systemsContext.Provider>
     </userContext.Provider>
     </userCredContext.Provider>

@@ -1,9 +1,9 @@
 import { useState, useContext, useEffect, useRef } from "react"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
-import { celestialContext } from "./celestialContext"
 import Draggable from "react-draggable"
 import { animated, useSpring } from "react-spring"
 import "./css/CelestialData.css"
+import { stateContext } from "../../context/stateContext"
 
 export interface dataActiveState {
   active: boolean,
@@ -30,11 +30,11 @@ const CelestialData = (props: any) => {
     }
   }, [active])
 
-  const { celestialIndexer, setCelestialIndexer } = useContext(celestialContext)
+  const { state, set } = useContext(stateContext)
 
   //So we only set this once, rather than upon each rerender
   useEffect(() => {
-    setCelestialIndexer(setActive, props.index, "setCelestialDataActive")
+    set(props.loc.symbol, "setCelestialDataActive", setActive)
   }, [])
 
   const animate = useSpring({
@@ -49,7 +49,7 @@ const CelestialData = (props: any) => {
   
   const style = {
     // transform: `translate(${active?.x/xy.x * 100}vw, ${active?.y/xy.y * 100}vh)`,
-    zIndex: active?.active ? 10 : -10,
+    zIndex: active?.active ? 10 : -20,
     opacity: active?.active ? 1 : 0,
   }
 
@@ -97,7 +97,7 @@ const CelestialData = (props: any) => {
               onMouseOut={() => { setHoverQuit(!hoverQuit) }}
               onClick={() => {
                 setActive({ active: !active.active, x: 0, y: 0 })
-                celestialIndexer[props.index].setCelestialActive(false)
+                state[props.loc.symbol]['setCelestialActive'](false)
               }}
             >
               X

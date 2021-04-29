@@ -1,19 +1,19 @@
 import { useState, useRef, useContext, useEffect } from "react"
 import { colors, scale } from "./css/SpaceMap"
 import * as THREE from 'three'
-import { celestialContext } from "./celestialContext"
 import Wormhole from "./Wormhole"
+import { stateContext } from "../../context/stateContext"
 
 const Celestial = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
   const [hovered, setHover] = useState<boolean>(false)
   const [active, setActive] = useState<boolean>(false)
 
-  const { celestialIndexer, setCelestialIndexer } = useContext(celestialContext)
+  const { state, set } = useContext(stateContext)
 
   //So we only set this once, rather than upon each rerender
   useEffect(() => {
-    setCelestialIndexer(setActive, props.index, "setCelestialActive")
+    set(props.loc.symbol, "setCelestialActive", setActive)
   }, [])
 
   //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
@@ -31,7 +31,7 @@ const Celestial = (props: any) => {
       ref={mesh}
       scale={active ? 1.5 * _s : _s}
       onClick={(event) => {
-        celestialIndexer[props.index].setCelestialDataActive({active: !active, x: event.pageX, y: event.pageY})
+        state[props.loc.symbol]['setCelestialDataActive']({active: !active, x: event.pageX, y: event.pageY})
         setActive(!active)
       }}
       onPointerOver={(event) => {

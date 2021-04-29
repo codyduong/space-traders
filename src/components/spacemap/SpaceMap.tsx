@@ -4,27 +4,12 @@ import { Canvas } from "@react-three/fiber"
 import { Plane, Stars } from "@react-three/drei"
 import Celestial from "./Celestial"
 import CelestialData, { dataActiveState } from "./CelestialData"
-import { celestialContext } from "./celestialContext"
 import { Location } from "spacetraders-sdk/dist/types"
-import { CelestialIndexer } from "./c_types"
 import { systemsContext } from "../../context/systemsContext"
+import { stateContext } from "../../context/stateContext"
 
 const SpaceMap = (props: any) => {
   const { systemSelected } = useContext(systemsContext)
-  const [celestialIndexer, setCelestialIndexer] = useState<CelestialIndexer[]>([])
-  //I pray I never have to attempt to understand the context happening here.
-  const sCI = (f: React.Dispatch<React.SetStateAction<any>>, n: number, s: string) => {
-    let _: any[] = celestialIndexer
-    let f1: React.Dispatch<React.SetStateAction<boolean>> = _[n]?.setCelestialActive!
-    let f2: React.Dispatch<React.SetStateAction<dataActiveState>> = _[n]?.setCelestialDataActive!
-    //console.log(s, s==="setCelestialActive", s==="setCelestialDataActive", n)
-    if (s==="setCelestialActive") {f1=f} 
-    else if (s==="setCelestialDataActive") {f2=f}
-    let __: CelestialIndexer = {setCelestialActive: f1, setCelestialDataActive: f2}
-    _[n] = __
-    setCelestialIndexer(_)
-    //console.log(celestialIndexer)
-  }
 
   const [CelestialDatas, Celestials] = [props.system?.locations?.map((loc: Location, index: number) => {
     const __ = <CelestialData 
@@ -40,24 +25,24 @@ const SpaceMap = (props: any) => {
       position={[loc.x, loc.y, 0]}
       name={loc.name}
       type={loc.type}
+      loc={loc}
     />
     return __
   })]
 
   // FUCK https://github.com/pmndrs/react-three-fiber/issues/262
   function ForwardCanvas({ children }: any) {
-    const value = useContext(celestialContext)
+    const value = useContext(stateContext)
     return (
       <Canvas linear camera={{ position: [0, 0, 200], fov: 100 }}>
-        <celestialContext.Provider value={value}>
+        <stateContext.Provider value={value}>
           {children}
-        </celestialContext.Provider>
+        </stateContext.Provider>
       </Canvas>
     )
   }
 
   return (
-    <celestialContext.Provider value={{celestialIndexer: celestialIndexer, setCelestialIndexer: sCI}}> 
     <div 
       className="SpaceMap_Main" 
       style={{zIndex: systemSelected===props.index ? -10 : -100}}
@@ -78,7 +63,6 @@ const SpaceMap = (props: any) => {
       </div>
       {CelestialDatas}
     </div>
-    </celestialContext.Provider>
   )
 }
 
