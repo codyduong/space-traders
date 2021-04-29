@@ -81,13 +81,12 @@ const Main = () => {
     }
   }, [userCred, systems, user, session])
 
-  const [stateCurrent, setStateCurrent] = useState<Record<string, Record<string, React.Dispatch<React.SetStateAction<any>>>>>({})
+  const [stateCurrent, setStateCurrent] = useState<Record<string, Record<string, any>>>({})
   //I pray I never have to attempt to understand the context happening here.
-  const sSC = (name: string, functionName: string , f: React.Dispatch<React.SetStateAction<any>>) => {
-    //LOL good luck with this
-    let _: Record<string, Record<string, React.Dispatch<React.SetStateAction<any>>>> = stateCurrent
+  const sSC = (name: string, functionName: string , value: any) => {
+    let _: Record<string, Record<string, any>> = stateCurrent
     _[name] = stateCurrent[name] ?? {}
-    _[name][functionName] = f
+    _[name][functionName] = value
     setStateCurrent(_)
   }
 

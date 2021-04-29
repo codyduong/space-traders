@@ -3,6 +3,7 @@ import { colors, scale } from "./css/SpaceMap"
 import * as THREE from 'three'
 import Wormhole from "./Wormhole"
 import { stateContext } from "../../context/stateContext"
+import { position } from "../../types"
 
 const Celestial = (props: any) => {
   const mesh = useRef<THREE.Mesh>(null!)
@@ -11,9 +12,11 @@ const Celestial = (props: any) => {
 
   const { state, set } = useContext(stateContext)
 
+  const setCelestialActive: any = (value: boolean | null) => {if (value===null) {return active} else {setActive(value); return null}}
+
   //So we only set this once, rather than upon each rerender
   useEffect(() => {
-    set(props.loc.symbol, "setCelestialActive", setActive)
+    set(props.loc.symbol, "setCelestialActive", setCelestialActive)
   }, [])
 
   //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01))
@@ -31,7 +34,10 @@ const Celestial = (props: any) => {
       ref={mesh}
       scale={active ? 1.5 * _s : _s}
       onClick={(event) => {
-        state[props.loc.symbol]['setCelestialDataActive']({active: !active, x: event.pageX, y: event.pageY})
+        state[props.loc.symbol]['setLocationActive'](!active)
+        state[props.loc.symbol]['setCelestialActive'](!active)
+        state[props.loc.symbol]['setCelestialDataActive'](!active)
+        state[props.loc.symbol]['setCelestialDataPosition']({x: event.pageX, y: event.pageY} as position)
         setActive(!active)
       }}
       onPointerOver={(event) => {

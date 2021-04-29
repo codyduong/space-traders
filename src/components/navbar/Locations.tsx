@@ -3,7 +3,34 @@ import { animated, useSpring } from "react-spring"
 import { Location } from "spacetraders-sdk/dist/types"
 import { stateContext } from "../../context/stateContext"
 import { systemsContext } from "../../context/systemsContext"
+import { position } from "../../types"
 import "./css/Locations.css"
+
+const Loc = (props: any) => {
+  const [active, setActive] = useState(false)
+
+  const { state, set } = useContext(stateContext)
+  useEffect(() => {
+    set(props.location.symbol, 'setLocationActive', setActive)
+  }, [])
+
+  return (
+    <div key={props.location.symbol}>
+      {props.location.name}
+      <input
+        style={{float: 'right'}}
+        type="button"
+        value="Select"
+        onClick={(event)=>{
+          state[props.location.symbol]['setCelestialActive'](!active)
+          state[props.location.symbol]['setCelestialDataActive'](!active)
+          state[props.location.symbol]['setCelestialDataPosition']({x: event.pageX + 30, y: event.pageY} as position)
+          setActive(!active)
+        }}
+      ></input>
+    </div>
+  )
+}
 
 const Locations = (props: any) => {
   const { systems, systemSelected } = useContext(systemsContext)
@@ -24,21 +51,8 @@ const Locations = (props: any) => {
     from: { maxWidth: !init ? '30em' : '0em', maxHeight: !init ? '30em' : '0em'},
   })
 
-  const { state } = useContext(stateContext)
-
-  const locations = systems?.systems[systemSelected]?.locations.map((location: Location, index: number) => {
-    return (
-      <div key={location.symbol}>
-        {location.name}
-        <input
-          type="button"
-          value="Select"
-          onClick={()=>{
-            state[location.symbol]['setDataActive'](true)
-          }}
-        ></input>
-      </div>
-    )
+  const locations = systems?.systems[systemSelected]?.locations.map((location: Location) => {
+    return <Loc location={location}/>
   })
 
   return (

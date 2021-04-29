@@ -4,37 +4,24 @@ import Draggable from "react-draggable"
 import { animated, useSpring } from "react-spring"
 import "./css/CelestialData.css"
 import { stateContext } from "../../context/stateContext"
-
-export interface dataActiveState {
-  active: boolean,
-  x: number,
-  y: number,
-}
-
-interface ratios {
-  x: number,
-  y: number,
-}
+import { position } from "../../types"
 
 const CelestialData = (props: any) => {
-  const [active, setActive] = useState<dataActiveState>({active: false, x: 0, y: 0})
+  const [active, setActive] = useState<boolean>(false)
+  const [position, setPosition] = useState<position>({x: 0, y: 0})
   const [shown, setShown] = useState<boolean>(false)
   const [hoverQuit, setHoverQuit] = useState<boolean>(false)
   const [hoverMove, setHoverMove] = useState<boolean>(false)
-  const [ratio, setRatios] = useState<ratios>({x: 0, y: 0})
   const { height, width } = useWindowDimensions()
 
-  useEffect(() => {
-    if (active?.active===true) {
-      setRatios({x: active?.x/width, y: active?.y/height})
-    }
-  }, [active])
+  const onControlledDrag = (e: any, position: position) => {const {x, y} = position; setPosition({x, y});};
 
+  const setCelestialDataActive: any = (value: boolean | null) => {if (value===null) {return active} else {setActive(value); return null}}
+  const setCelestialDataPosition: any = (value: position | null) => {if (value===null) {return position} else {setPosition(value); return null}}
   const { state, set } = useContext(stateContext)
-
-  //So we only set this once, rather than upon each rerender
   useEffect(() => {
-    set(props.loc.symbol, "setCelestialDataActive", setActive)
+    set(props.loc.symbol, "setCelestialDataActive", setCelestialDataActive)
+    set(props.loc.symbol, "setCelestialDataPosition", setCelestialDataPosition)
   }, [])
 
   const animate = useSpring({
@@ -48,21 +35,22 @@ const CelestialData = (props: any) => {
   })
   
   const style = {
-    // transform: `translate(${active?.x/xy.x * 100}vw, ${active?.y/xy.y * 100}vh)`,
-    zIndex: active?.active ? 10 : -20,
-    opacity: active?.active ? 1 : 0,
+    zIndex: active ? 10 : -20,
+    opacity: active ? 1 : 0,
   }
 
   const ref = useRef<HTMLDivElement>(null!)
   return (
     <Draggable 
-      positionOffset={{x: ratio?.x*width, y: ratio?.y*height}} 
+      position={position} 
+      onDrag={onControlledDrag}
       handle="span"
       bounds={{
-        top: - ratio?.y*height, 
-        right: width - ratio?.x*width - ref?.current?.offsetWidth,
-        bottom: height - ratio?.y*height - ref?.current?.offsetHeight, 
-        left: - ratio?.x*width}}
+        top: 0,
+        right: width - ref?.current?.offsetWidth,
+        bottom: height - ref?.current?.offsetHeight,
+        left: 0,
+      }}
     >
       <div
         ref={ref}
@@ -96,8 +84,9 @@ const CelestialData = (props: any) => {
               onMouseOver={() => { setHoverQuit(!hoverQuit) }}
               onMouseOut={() => { setHoverQuit(!hoverQuit) }}
               onClick={() => {
-                setActive({ active: !active.active, x: 0, y: 0 })
+                state[props.loc.symbol]['setLocationActive'](false)
                 state[props.loc.symbol]['setCelestialActive'](false)
+                setActive(false)
               }}
             >
               X
