@@ -21,6 +21,9 @@
   .CelesitalData_Name {
     display: block;
   }
+  .CelesitalData_Name:hover {
+    cursor: move;
+  }
   
   .CelesitalData_NavBar {
     display: inline-flex;
@@ -49,6 +52,9 @@
     /* border: solid;
     border-color: hsl(0, 0%, 0%);
     border-width: .125em; */
+  }
+  .CelestialData_Quit:hover {
+    background-color: hsl(0, 100%, 75%);
   }
 
   .CelestialData_Surplus {

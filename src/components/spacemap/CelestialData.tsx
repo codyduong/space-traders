@@ -10,8 +10,6 @@ const CelestialData = (props: any) => {
   const [active, setActive] = useState<boolean>(false)
   const [position, setPosition] = useState<position>({x: 0, y: 0})
   const [shown, setShown] = useState<boolean>(false)
-  const [hoverQuit, setHoverQuit] = useState<boolean>(false)
-  const [hoverMove, setHoverMove] = useState<boolean>(false)
   const { height, width } = useWindowDimensions()
 
   const onControlledDrag = (e: any, position: position) => {const {x, y} = position; setPosition({x, y});};
@@ -62,9 +60,6 @@ const CelestialData = (props: any) => {
           <span>
             <div
               className="CelesitalData_Name"
-              style={{ cursor: hoverMove ? 'move' : 'auto' }}
-              onMouseOver={() => { setHoverMove(!hoverMove) }}
-              onMouseOut={() => { setHoverMove(!hoverMove) }}
             >
               {String(`[${props.loc.symbol}] ${props.loc.name}`)}
             </div>
@@ -80,9 +75,6 @@ const CelestialData = (props: any) => {
             </div>
             <div
               className="CelestialData_Quit"
-              style={{ backgroundColor: hoverQuit ? 'hsl(0, 100%, 75%)' : '' }}
-              onMouseOver={() => { setHoverQuit(!hoverQuit) }}
-              onMouseOut={() => { setHoverQuit(!hoverQuit) }}
               onClick={() => {
                 state[props.loc.symbol]['setLocationActive'](false)
                 state[props.loc.symbol]['setCelestialActive'](false)
