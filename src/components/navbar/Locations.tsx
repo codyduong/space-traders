@@ -7,7 +7,7 @@ import { position } from "../../types"
 import "./css/Locations.css"
 
 const Loc = (props: any) => {
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState<boolean>(false)
 
   const { state, set } = useContext(stateContext)
   useEffect(() => {
