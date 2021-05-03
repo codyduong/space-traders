@@ -58,18 +58,16 @@ const Main = () => {
   useEffect(() => {
     if (userCred) {
       if (user===null || session===null) {
-        spaceTraders.getAccount()
-          .then(res => {
-            console.log(res)
-            setUser(res.user)
-          })
+        spaceTraders.getAccount().then(res => {
+          console.log(res)
+          setUser(res.user)
+        })
       }
       if (systems===null || session===null) {
-        spaceTraders.listSystems()
-          .then(res => {
-            console.log(res)
-            setSystems(res)
-          })
+        spaceTraders.listSystems().then(res => {
+          console.log(res)
+          setSystems(res)
+        })
       }
     }
     if (session===null) {

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import { useSpring, animated } from "react-spring"
 import { userCredContext } from "../../context/userCredContext"
 import { SpaceTraders } from "spacetraders-sdk"
+import { getErrorCode } from "../../scripts/RegExp"
 
 const spaceTraders = new SpaceTraders()
 
@@ -12,9 +13,20 @@ const UserCredentials = () => {
   const [showToke, setShowToke] = useState<boolean>(false)
   
   const registerUser = () => {
-    spaceTraders.init(userCred.username).then(res => {
-      setToke(res)
-    })
+    spaceTraders.init(user)
+      .then(res => {
+        console.log(res)
+        setToke(res)
+        updateUserCred({username: `${user}`, token: `${toke}`})
+      })
+      .catch(e => {
+        console.log(e.message)
+        console.log(getErrorCode(e.message))
+        if (getErrorCode(e.message)==='409') {
+          alert("This user is already registered")
+        }
+        else throw(e)
+      })
   }
 
   const [shown, setShown]  = useState<boolean>(false)
