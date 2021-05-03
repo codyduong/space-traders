@@ -36,7 +36,7 @@ const Main = () => {
   }
 
   const [user, setUser] = useSessionStorage<User>('user')
-  const updateUser = (user: User) => {
+  const updateUser = () => {
     userCred && spaceTraders.getAccount()
       .then(res => {
         console.log(res.user)

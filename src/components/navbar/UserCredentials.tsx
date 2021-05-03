@@ -1,6 +1,9 @@
 import { useState, useEffect, useContext } from "react"
 import { useSpring, animated } from "react-spring"
 import { userCredContext } from "../../context/userCredContext"
+import { SpaceTraders } from "spacetraders-sdk"
+
+const spaceTraders = new SpaceTraders()
 
 const UserCredentials = () => {
   const {userCred, updateUserCred} = useContext(userCredContext)
@@ -8,6 +11,12 @@ const UserCredentials = () => {
   const [toke, setToke] = useState<string>(userCred?.token ?? '')
   const [showToke, setShowToke] = useState<boolean>(false)
   
+  const registerUser = () => {
+    spaceTraders.init(userCred.username).then(res => {
+      setToke(res)
+    })
+  }
+
   const [shown, setShown]  = useState<boolean>(false)
   const [init, setInit] = useState<boolean>(false)
   useEffect(()=>{
@@ -62,6 +71,17 @@ const UserCredentials = () => {
           defaultValue="Submit"
           onClick={()=>{
             updateUserCred({username: `${user}`, token: `${toke}`})
+          }}
+        ></input>
+        <input
+          className={toke === "" ? "UserCredentials_Button" : "UserCredentials_Button tooltip"}
+          id="submit"
+          type="button"
+          defaultValue="Register User"
+          disabled={toke === "" ? (user !== "" ? false : true) : true}
+          title={user !== "" ? (toke === "" ? '' : 'Token field must be null') : 'Username cannot be null'}
+          onClick={()=>{
+            registerUser()
           }}
         ></input>
       </animated.div>
