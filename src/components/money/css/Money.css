@@ -1,4 +1,4 @@
-.Money_Main {
+.money-main {
   text-align: center;
   width: fit-content;
   height: fit-content;
@@ -8,7 +8,7 @@
   z-index: 10;
 }
 
-.Money_Credits {
+.money-credits {
   z-index: inherit;
   width: fit-content;
   height: fit-content;

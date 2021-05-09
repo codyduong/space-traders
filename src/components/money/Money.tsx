@@ -25,9 +25,9 @@ const Money = () => {
   return (
     <userContext.Consumer>
       {({ user }) => (
-        <div className="Money_Main">
+        <div className="money-main">
           <div 
-            className="Money_Credits"
+            className="money-credits"
             onClick={()=>{
               setShown(!shown)
             }}

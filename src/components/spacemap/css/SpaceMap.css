@@ -10,11 +10,11 @@
   --hovered: hsl(0, 100%, 75%);
 }
 
-.SpaceMap_Main {
+.spacemap-main {
   z-index: -10;
 }
 
-.SpaceMap_Canvas {
+.spacemap-canvas {
   display: block;
   overflow-x: visible;
   overflow-y: visible;

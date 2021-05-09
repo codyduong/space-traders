@@ -7,8 +7,8 @@ import Locations from "./Locations"
 const NavBar = () => {
 
   return (
-    <div className="NavBar_Main">
-      <div className="NavBar_Buttons">
+    <div className="navbar-main">
+      <div className="navbar_buttons">
         <UserCredentials />
         <SelectSystem/>
         <Ships />

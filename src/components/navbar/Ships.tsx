@@ -24,7 +24,7 @@ const Ships = (props: any) => {
   const {user} = useContext(userContext)
   const ships = user?.ships?.map((ship: any) => {
     return (
-      <div className="Ships_Singular" key={ship.id}>
+      <div className="ships-singular" key={ship.id}>
         ID: {ship.id}<br/>
         Type: {ship.type}<br/>
         Location: {ship.location}<br/>
@@ -42,9 +42,9 @@ const Ships = (props: any) => {
   })
 
   return (
-    <div className="Ships_Main">
+    <div className="ships-main">
       <input
-        className="Ships_Button"
+        className="ships-button"
         type="button"
         onClick={() => { 
           setShown(!shown)
@@ -52,7 +52,7 @@ const Ships = (props: any) => {
         value={shown ? "Ships ▲" : "Ships ▼"}
       ></input>
       <animated.div style={animate}>
-        <div className="Ships_Grid">
+        <div className="ships-grid">
           {ships}
         </div>
       </animated.div>

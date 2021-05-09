@@ -1,11 +1,11 @@
-.NavBar_Main {
+.navbar-main {
   z-index: 10;
   width: fit-content;
   height: fit-content;
   background-color: white;
 }
 
-.NavBar_Buttons {
+.navbar-buttons {
   width: fit-content;
   height: fit-content;
 }

@@ -44,10 +44,10 @@ const SpaceMap = (props: any) => {
 
   return (
     <div 
-      className="SpaceMap_Main" 
+      className="spacemap-main" 
       style={{zIndex: systemSelected===props.index ? -10 : -100}}
     >
-      <div className="SpaceMap_Canvas">
+      <div className="spacemap-canvas">
         <ForwardCanvas>
           <ambientLight />
           <Plane position={[0, 0, -300]} args={[3000, 3000, 4, 4]}>

@@ -93,9 +93,9 @@ const Main = () => {
     <userContext.Provider value={{user: user, updateUser: updateUser}}>
     <systemsContext.Provider value={{systems: systems, updateSystems: updateSystems, systemSelected: systemSelected, selectSystem: selectSystem}}>
     <stateContext.Provider value={{state: stateCurrent, set: sSC}}>
-    <div className="Main">
+    <div className="main">
       <SystemsManager />
-      <div className="Main_ResponsiveGrid">
+      <div className="main-grid">
         <NavBar />
         <Money />
       </div>

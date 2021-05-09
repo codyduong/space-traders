@@ -54,21 +54,21 @@ const CelestialData = (props: any) => {
     >
       <div
         ref={ref}
-        className="CelestialData_Main"
+        className="celestialdata-main"
         id={props.loc.name}
         style={style}
       >
-        <div className="CelestialData_Tab">
+        <div className="celestialdata-tab">
           <span>
             <div
-              className="CelestialData_Name"
+              className="celestialdata-name"
             >
               {String(`[${props.loc.symbol}] ${props.loc.name}`)}
             </div>
           </span>
-          <div className="CelestialData_NavBar">
+          <div className="celestialdata-navbar">
             <div
-              className="CelestialData_Mini"
+              className="celestialdata-mini"
               onClick={() => {
                 setShown(!shown)
               }}
@@ -76,7 +76,7 @@ const CelestialData = (props: any) => {
               {shown ? <img src={UpArrow} alt="▲"></img> : <img src={DownArrow} alt="▼"></img>}
             </div>
             <div
-              className="CelestialData_Quit"
+              className="celestialdata-quit"
               onClick={() => {
                 state[props.loc.symbol]['setLocationActive'](false)
                 state[props.loc.symbol]['setCelestialActive'](false)
@@ -88,9 +88,9 @@ const CelestialData = (props: any) => {
           </div>
         </div>
         <animated.div style={animate}>
-          <div className="CelestialData_Data">
-            <div className="CelestialData_Coordinates">{String(`${props.loc.x}, ${props.loc.y}`)}</div>
-            <div className="CelestialData_Construction">{String(`Build: ${props.loc.allowsConstruction}`)}</div>
+          <div className="celestialdata-data">
+            <div className="celestialdata-doordinates">{String(`${props.loc.x}, ${props.loc.y}`)}</div>
+            <div className="celestialdata-construction">{String(`Build: ${props.loc.allowsConstruction}`)}</div>
           </div>
         </animated.div>
       </div>

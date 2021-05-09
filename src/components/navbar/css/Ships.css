@@ -1,19 +1,19 @@
-.Ships_Main {
+.ships-main {
   z-index: inherit;
 }
 
-.Ships_Button {
+.ships-button {
   z-index: inherit;
 }
 
-.Ships_Grid {
+.ships-grid {
   display: grid;
   row-gap: 1em;
   column-gap: 1em;
   z-index: inherit;
 }
 
-.Ships_Singular {
+.ships-singular {
   display: grid;
   border-style: solid;
   border-width: 1px;
