@@ -5,6 +5,8 @@ import { animated, useSpring } from "react-spring"
 import "./css/CelestialData.css"
 import { stateContext } from "../../context/stateContext"
 import { position } from "../../types"
+import DownArrow from "./chevron-bar-down.svg"
+import UpArrow from "./chevron-bar-up.svg"
 
 const CelestialData = (props: any) => {
   const [active, setActive] = useState<boolean>(false)
@@ -52,26 +54,26 @@ const CelestialData = (props: any) => {
     >
       <div
         ref={ref}
-        className="CelesitalData_Main"
+        className="CelestialData_Main"
         id={props.loc.name}
         style={style}
       >
-        <div className="CelesitalData_Tab">
+        <div className="CelestialData_Tab">
           <span>
             <div
-              className="CelesitalData_Name"
+              className="CelestialData_Name"
             >
               {String(`[${props.loc.symbol}] ${props.loc.name}`)}
             </div>
           </span>
-          <div className="CelesitalData_NavBar">
+          <div className="CelestialData_NavBar">
             <div
-              className="CelesitalData_Mini"
+              className="CelestialData_Mini"
               onClick={() => {
                 setShown(!shown)
               }}
             >
-              {shown ? '-' : '☐'}
+              {shown ? <img src={UpArrow} alt="▲"></img> : <img src={DownArrow} alt="▼"></img>}
             </div>
             <div
               className="CelestialData_Quit"
@@ -86,11 +88,9 @@ const CelestialData = (props: any) => {
           </div>
         </div>
         <animated.div style={animate}>
-          {String(`Coordinates: (X: ${props.loc.x}, Y: ${props.loc.y})`)}
-          <div
-            className="CelesitalData_SurplusData"
-          >
-            
+          <div className="CelestialData_Data">
+            <div className="CelestialData_Coordinates">{String(`${props.loc.x}, ${props.loc.y}`)}</div>
+            <div className="CelestialData_Construction">{String(`Build: ${props.loc.allowsConstruction}`)}</div>
           </div>
         </animated.div>
       </div>

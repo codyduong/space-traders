@@ -1,62 +1,85 @@
-.CelesitalData_Main {
-    opacity: 0;
-    background-color: hsla(0, 0%, 90%, 1);
-    z-index: -10;
-    position: absolute;
-    border: solid;
-    border-color: hsl(187, 100%, 50%);
-    border-width: .125em;
-    border-radius: 0em;
-  }
-  
-  .CelesitalData_Tab {
-    display: grid;
-    grid-template-columns: auto 3.5em;
-    height: 1.5em;
-    padding: 0 0 0 0;
-    background-color: hsla(0, 0%, 100%, 1);
-    align-content: center;
-  }
-  
-  .CelesitalData_Name {
-    display: block;
-  }
-  .CelesitalData_Name:hover {
-    cursor: move;
-  }
-  
-  .CelesitalData_NavBar {
-    display: inline-flex;
-    height: 1.5em;
-    overflow: hidden;
-    margin-left: .5em;
-  }
-  
-  .CelesitalData_Mini {
-    display: inline-block;
-    text-align: center;
-    color: hsl(0, 100%, 25%);
-    height: 1.5em;
-    width: 1.5em;
-    /* border: solid;
-    border-color: hsl(0, 0%, 0%);
-    border-width: .125em; */
-  }
-  
-  .CelestialData_Quit {
-    display: inline-block;
-    text-align: center;
-    color: hsl(0, 100%, 25%);
-    height: 1.5em;
-    width: 1.5em;
-    /* border: solid;
-    border-color: hsl(0, 0%, 0%);
-    border-width: .125em; */
-  }
-  .CelestialData_Quit:hover {
-    background-color: hsl(0, 100%, 75%);
-  }
 
-  .CelestialData_Surplus {
-    display: grid;
-  }
+img {
+  height: 1.2 5em;
+  width: 1.25em;
+}
+
+.CelestialData_Main {
+  opacity: 0;
+  background-color: hsla(0, 0%, 90%, 1);
+  z-index: -10;
+  position: absolute;
+  border: solid;
+  border-color: hsl(187, 100%, 50%);
+  border-width: .125em;
+  border-radius: 0em;
+}
+
+.CelestialData_Tab {
+  display: grid;
+  grid-template-columns: auto 3.5em;
+  height: 1.5em;
+  padding: 0 0 0 0;
+  background-color: hsla(0, 0%, 100%, 1);
+  align-content: center;
+}
+
+.CelestialData_Name {
+  display: block;
+}
+.CelestialData_Name:hover {
+  cursor: move;
+}
+
+.CelestialData_NavBar {
+  display: inline-flex;
+  height: 1.5em;
+  overflow: hidden;
+  margin-left: .5em;
+}
+
+.CelestialData_Mini {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: hsl(0, 100%, 25%);
+  height: 1.5em;
+  width: 1.5em;
+  /* border: solid;
+  border-color: hsl(0, 0%, 0%);
+  border-width: .125em; */
+}
+.CelestialData_Mini:hover {
+  background-color: hsl(0, 0%, 75%);
+}
+
+.CelestialData_Quit {
+  display: inline-block;
+  text-align: center;
+  color: hsl(0, 100%, 25%);
+  height: 1.5em;
+  width: 1.5em;
+  /* border: solid;
+  border-color: hsl(0, 0%, 0%);
+  border-width: .125em; */
+}
+.CelestialData_Quit:hover {
+  background-color: hsl(0, 100%, 75%);
+}
+
+.CelestialData_Data {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1.5em auto;
+  grid-template-areas: 
+    "headerLeft headerRight"
+    "body body";
+}
+.CelestialData_Coordinates {
+  justify-self: start;
+  grid-area: headerLeft;
+}
+.CelestialData_Construction {
+  justify-self: end;
+  grid-area: headerRight;
+}
