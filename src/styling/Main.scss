@@ -5,12 +5,12 @@
   overflow-x: visible;
   overflow-y: visible;
   z-index: -1000;
-}
 
-.main-grid {
-  display: grid;
-  grid-template-columns: 33vw 33vw 33vw;
-  grid-template-rows: auto;
-  overflow: visible;
-  overflow: visible;
+  &-grid {
+    display: grid;
+    grid-template-columns: 33vw 33vw 33vw;
+    grid-template-rows: auto;
+    overflow: visible;
+    overflow: visible;
+  }
 }
