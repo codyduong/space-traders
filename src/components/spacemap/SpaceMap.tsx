@@ -1,5 +1,4 @@
 import { useState, useContext } from "react"
-import "./css/SpaceMap.css"
 import { Canvas } from "@react-three/fiber"
 import { Plane, Stars } from "@react-three/drei"
 import Celestial from "./Celestial"
@@ -7,6 +6,8 @@ import CelestialData from "./CelestialData"
 import { Location } from "spacetraders-sdk/dist/types"
 import { systemsContext } from "../../context/systemsContext"
 import { stateContext } from "../../context/stateContext"
+
+import "./styling/SpaceMap.scss"
 
 const SpaceMap = (props: any) => {
   const { systemSelected } = useContext(systemsContext)

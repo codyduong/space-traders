@@ -10,18 +10,20 @@
   --hovered: hsl(0, 100%, 75%);
 }
 
-.spacemap-main {
-  z-index: -10;
-}
+.spacemap {
+  &-main {
+    z-index: -10;
+  }
 
-.spacemap-canvas {
-  display: block;
-  overflow-x: visible;
-  overflow-y: visible;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: inherit;
+  &-canvas {
+    display: block;
+    overflow-x: visible;
+    overflow-y: visible;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: inherit;
+  }
 }

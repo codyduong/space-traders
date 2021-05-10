@@ -4,7 +4,8 @@ import { Location } from "spacetraders-sdk/dist/types"
 import { stateContext } from "../../context/stateContext"
 import { systemsContext } from "../../context/systemsContext"
 import { position } from "../../types"
-import "./css/Locations.css"
+
+import "./styling/Locations.scss"
 
 const Loc = (props: any) => {
   const [active, setActive] = useState<boolean>(false)

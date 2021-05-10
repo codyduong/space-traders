@@ -2,11 +2,12 @@ import { useState, useContext, useEffect, useRef } from "react"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import Draggable from "react-draggable"
 import { animated, useSpring } from "react-spring"
-import "./css/CelestialData.css"
 import { stateContext } from "../../context/stateContext"
 import { position } from "../../types"
-import DownArrow from "./chevron-bar-down.svg"
-import UpArrow from "./chevron-bar-up.svg"
+
+import "./styling/CelestialData.scss"
+import DownArrow from "./styling/chevron-bar-down.svg"
+import UpArrow from "./styling/chevron-bar-up.svg"
 
 const CelestialData = (props: any) => {
   const [active, setActive] = useState<boolean>(false)

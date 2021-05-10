@@ -1,7 +1,8 @@
 import { useContext, useState, useEffect } from "react"
 import { userContext } from "../../context/userContext"
 import { animated, useSpring } from "react-spring"
-import "./css/Ships.css"
+
+import "./styling/Ships.scss"
 
 const Ships = (props: any) => {
 

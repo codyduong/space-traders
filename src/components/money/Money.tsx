@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react"
 import { userContext } from "../../context/userContext"
 import { animated, useSpring } from "react-spring"
-import "./css/Money.css"
+
+import "./styling/Money.scss"
 
 const Money = () => {
 

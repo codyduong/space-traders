@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import "./css/Main.css"
 // import { settingsDefault, settingsContext } from "./context/settingsContext"
 // import settingsInterface from "./interfaces/settings"
 import { userContext } from "./context/userContext"
@@ -17,6 +16,8 @@ import { UserCred } from "./types"
 import { SpaceTraders } from "spacetraders-sdk"
 import { AuthenticationError } from "spacetraders-sdk/dist/errors"
 import { stateContext } from "./context/stateContext"
+
+import "./styling/Main.scss"
 
 const spaceTraders = new SpaceTraders()
 

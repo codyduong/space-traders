@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from "react"
-import { colors, scale } from "./css/SpaceMap"
+import { colors, scale } from "./styling/SpaceMap"
 import * as THREE from 'three'
 import Wormhole from "./Wormhole"
 import { stateContext } from "../../context/stateContext"
