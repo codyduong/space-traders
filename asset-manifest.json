@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/space-traders/static/css/main.2ffb32cd.chunk.css",
-    "main.js": "/space-traders/static/js/main.051c81a8.chunk.js",
-    "main.js.map": "/space-traders/static/js/main.051c81a8.chunk.js.map",
-    "runtime-main.js": "/space-traders/static/js/runtime-main.4e72ffde.js",
-    "runtime-main.js.map": "/space-traders/static/js/runtime-main.4e72ffde.js.map",
-    "static/js/2.143942e1.chunk.js": "/space-traders/static/js/2.143942e1.chunk.js",
-    "static/js/2.143942e1.chunk.js.map": "/space-traders/static/js/2.143942e1.chunk.js.map",
-    "static/js/3.8b706413.chunk.js": "/space-traders/static/js/3.8b706413.chunk.js",
-    "static/js/3.8b706413.chunk.js.map": "/space-traders/static/js/3.8b706413.chunk.js.map",
+    "main.css": "/space-traders/static/css/main.11c0f02e.chunk.css",
+    "main.js": "/space-traders/static/js/main.310289c8.chunk.js",
+    "main.js.map": "/space-traders/static/js/main.310289c8.chunk.js.map",
+    "runtime-main.js": "/space-traders/static/js/runtime-main.7c667e7f.js",
+    "runtime-main.js.map": "/space-traders/static/js/runtime-main.7c667e7f.js.map",
+    "static/js/2.bf24fd2b.chunk.js": "/space-traders/static/js/2.bf24fd2b.chunk.js",
+    "static/js/2.bf24fd2b.chunk.js.map": "/space-traders/static/js/2.bf24fd2b.chunk.js.map",
+    "static/js/3.6f19a770.chunk.js": "/space-traders/static/js/3.6f19a770.chunk.js",
+    "static/js/3.6f19a770.chunk.js.map": "/space-traders/static/js/3.6f19a770.chunk.js.map",
     "index.html": "/space-traders/index.html",
-    "static/css/main.2ffb32cd.chunk.css.map": "/space-traders/static/css/main.2ffb32cd.chunk.css.map",
-    "static/js/2.143942e1.chunk.js.LICENSE.txt": "/space-traders/static/js/2.143942e1.chunk.js.LICENSE.txt"
+    "static/css/main.11c0f02e.chunk.css.map": "/space-traders/static/css/main.11c0f02e.chunk.css.map",
+    "static/js/2.bf24fd2b.chunk.js.LICENSE.txt": "/space-traders/static/js/2.bf24fd2b.chunk.js.LICENSE.txt",
+    "static/media/chevron-bar-down.9fce45e6.svg": "/space-traders/static/media/chevron-bar-down.9fce45e6.svg",
+    "static/media/chevron-bar-up.6e25079b.svg": "/space-traders/static/media/chevron-bar-up.6e25079b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4e72ffde.js",
-    "static/js/2.143942e1.chunk.js",
-    "static/css/main.2ffb32cd.chunk.css",
-    "static/js/main.051c81a8.chunk.js"
+    "static/js/runtime-main.7c667e7f.js",
+    "static/js/2.bf24fd2b.chunk.js",
+    "static/css/main.11c0f02e.chunk.css",
+    "static/js/main.310289c8.chunk.js"
   ]
 }
