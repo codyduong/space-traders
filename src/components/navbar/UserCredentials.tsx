@@ -17,7 +17,7 @@ const UserCredentials = () => {
       .then(res => {
         console.log(res)
         setToke(res)
-        updateUserCred({username: `${user}`, token: `${toke}`})
+        updateUserCred({username: `${user}`, token: res})
       })
       .catch(e => {
         console.log(e.message)
