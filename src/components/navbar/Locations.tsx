@@ -16,10 +16,9 @@ const Loc = (props: any) => {
   }, [])
 
   return (
-    <div key={props.location.symbol}>
+    <div key={props.location.symbol} className="locations-selector">
       {props.location.name}
       <input
-        style={{float: 'right'}}
         type="button"
         value="Select"
         onClick={(event)=>{
