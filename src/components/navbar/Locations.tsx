@@ -16,7 +16,7 @@ const Loc = (props: any) => {
   }, [])
 
   return (
-    <div key={props.location.symbol} className="locations-selector">
+    <div className="locations-selector">
       {props.location.name}
       <input
         type="button"
@@ -52,11 +52,11 @@ const Locations = (props: any) => {
   })
 
   const locations = systems?.systems[systemSelected]?.locations.map((location: Location) => {
-    return <Loc location={location}/>
+    return <Loc key={location.symbol} location={location}/>
   })
 
   return (
-    <div className="Locations_Main">
+    <div className="locations-main">
       <input
         type="button"
         onClick={() => {  

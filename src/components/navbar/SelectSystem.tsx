@@ -25,7 +25,7 @@ const SelectSystem = () => {
     return (
       <input
         key={system.name}
-        className="SelectSystem_Button"
+        className="selectsystem-button"
         type="Button"
         defaultValue={system.name}
         onClick={() => {
@@ -36,9 +36,9 @@ const SelectSystem = () => {
   })
   
   return (
-    <div>
+    <div className="selectsystem-main">
     <input
-      className="SelectSystem_Button"
+      className="selectsystem-butttons"
       type="Button"
       defaultValue={shown ? `Select System ▲: ${systems?.systems[systemSelected]?.name}` : `Select System ▼: ${systems?.systems[systemSelected]?.name}`}
       onClick={() => {

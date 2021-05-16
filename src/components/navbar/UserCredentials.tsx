@@ -46,7 +46,7 @@ const UserCredentials = () => {
   })
 
   return (
-    <div>
+    <div className="usercredentials-main">
       <input 
         type="button"
         defaultValue={shown ? `${userCred?.username} ▲` : `${userCred?.username} ▼`}
@@ -55,7 +55,7 @@ const UserCredentials = () => {
       <animated.div style={animate}>
         <label htmlFor="user">Username: </label>
         <input
-          className="UserCredentials_Text"
+          className="usercredentials-text"
           id="user"
           type="text"
           onChange={(event: any)=>{setUser(event.target.value)}}
@@ -63,21 +63,21 @@ const UserCredentials = () => {
         ></input><br />
         <label htmlFor="toke">Token: </label>
         <input
-          className="UserCredentials_Text"
+          className="usercredentials-text"
           id="toke"
           type={showToke ? "password" : "text"}
           onChange={(event: any)=>{setToke(event.target.value)}}
           value={toke}
         ></input>
         <input
-          className="UserCredentials_Button"
+          className="usercredentials-button"
           id="toke"
           type="button"
           value={showToke ? "Show" : "Hide"}
           onClick={()=>{setShowToke(!showToke)}}
         ></input><br />
         <input
-          className="UserCredentials_Button"
+          className="usercredentials-button"
           id="submit"
           type="button"
           defaultValue="Submit"
@@ -86,7 +86,7 @@ const UserCredentials = () => {
           }}
         ></input>
         <input
-          className={toke === "" ? "UserCredentials_Button" : "UserCredentials_Button tooltip"}
+          className={toke === "" ? "usercredentials-button" : "usercredentials-button tooltip"}
           id="submit"
           type="button"
           defaultValue="Register User"
