@@ -7,7 +7,7 @@ import NavBar from "./components/navbar/NavBar"
 import Money from "./components/money/Money"
 import { useCookies } from "react-cookie"
 import { useLocalStorage, useSessionStorage } from "./hooks/storageHooks"
-import { User, SystemsResponse } from "spacetraders-sdk/dist/types"
+import { User, SystemsResponse, AccountResponse } from "spacetraders-sdk/dist/types"
 import { UserCred } from "./types"
 import { SpaceTraders } from "spacetraders-sdk"
 import { AuthenticationError } from "spacetraders-sdk/dist/errors"
@@ -35,39 +35,24 @@ const Main = () => {
   const [user, setUser] = useSessionStorage<User>('user')
   const updateUser = () => {
     userCred && spaceTraders.getAccount()
-      .then(res => {
+      .then((res: AccountResponse) => {
         console.log(res.user)
         setUser(res.user)
       })
   }
 
   const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
-  const updateSystems = (systems: any) => {
-    userCred //&& spaceTraders.listSystems()
-    //They removed the listSystems endpoint for fog of war purposes
-    //I think its best to create an internal method to determine
-    //Systems and cache the data in the same format. I don't know
-    //Where this information is going to come from though.
-      .then(res => {
-        console.log(res)
-        setSystems(res)
-      })
-  } 
-
   const [systemSelected, selectSystem] = useSessionStorage<number>('systemSelected')
+  const updateSystems = (systems: any) => {
+    
+  } 
 
   useEffect(() => {
     if (userCred) {
       if (user===null || session===null) {
-        spaceTraders.getAccount().then(res => {
+        spaceTraders.getAccount().then((res: AccountResponse) => {
           console.log(res)
           setUser(res.user)
-        })
-      }
-      if (systems===null || session===null) {
-        spaceTraders.listSystems().then(res => {
-          console.log(res)
-          setSystems(res)
         })
       }
     }
