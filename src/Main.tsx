@@ -43,7 +43,11 @@ const Main = () => {
 
   const [systems, setSystems] = useSessionStorage<SystemsResponse>('systems')
   const updateSystems = (systems: any) => {
-    userCred && spaceTraders.listSystems()
+    userCred //&& spaceTraders.listSystems()
+    //They removed the listSystems endpoint for fog of war purposes
+    //I think its best to create an internal method to determine
+    //Systems and cache the data in the same format. I don't know
+    //Where this information is going to come from though.
       .then(res => {
         console.log(res)
         setSystems(res)
